@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;  // Importa Auth para obtener el usuario logueado
 use App\Models\Cuentas;
 use App\Models\User;
-use App\Models\suscripcion;
+use App\Models\Suscripcion;
 
 class Perfiles extends Model
 {

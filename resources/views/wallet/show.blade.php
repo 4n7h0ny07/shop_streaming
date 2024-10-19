@@ -92,129 +92,129 @@
 
 
 
-
-{{-- <form action="{{ route('wallet.debit') }}" method="POST">
+@section('javascript')
+    {{-- <form action="{{ route('wallet.debit') }}" method="POST">
         @csrf
         <input type="number" name="amount" placeholder="Monto">
         <button type="submit">Retirar Fondos</button>
     </form> --}}
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    let qrId = null; // Variable global para almacenar el ID del QR
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        let qrId = null; // Variable global para almacenar el ID del QR
 
-    // Función que se activa al enviar el formulario y generar el QR
-    $('#qrForm').on('submit', function(event) {
-        event.preventDefault(); // Evitar el envío tradicional del formulario
+        // Función que se activa al enviar el formulario y generar el QR
+        $('#qrForm').on('submit', function(event) {
+            event.preventDefault(); // Evitar el envío tradicional del formulario
 
-        const amount = $('#amount').val(); // Obtener el monto ingresado por el usuario
+            const amount = $('#amount').val(); // Obtener el monto ingresado por el usuario
 
-        if (amount && amount > 0) {
-            generateQr(amount); // Generar el QR
-        } else {
-            alert('Por favor, ingrese un monto válido.');
-        }
-    });
-
-    // Función para generar el QR
-    function generateQr(amount) {
-        $.ajax({
-            url: '{{ route('wallet.generateQr') }}', // Ruta para generar el QR
-            type: 'POST',
-            data: {
-                _token: '{{ csrf_token() }}', // Token CSRF para seguridad
-                amount: amount // Monto capturado del formulario
-            },
-            success: function(response) {
-                if (response.qrCode) {
-                    // Mostrar el código QR generado
-                    $('#qrCodeContainer').html(
-                        `<img src="data:image/png;base64,${response.qrCode}" alt="QR Code">`);
-                    qrId = response.qrId; // Guardar el ID del QR generado
-                    startQrStatusCheck(); // Iniciar la consulta automática del estado
-                }
-            },
-            error: function(error) {
-                alert('Error al generar el código QR');
+            if (amount && amount > 0) {
+                generateQr(amount); // Generar el QR
+            } else {
+                alert('Por favor, ingrese un monto válido.');
             }
         });
-    }
 
-    // Función para iniciar la consulta automática del estado del QR
-    function startQrStatusCheck() {
-        const interval = setInterval(function() {
-            checkQrStatus(interval); // Llamar a la función para consultar el estado
-        }, 10000); // Consultar cada 10 segundos
-    }
-
-    // Función para consultar el estado del QR
-    function checkQrStatus(interval) {
-        if (!qrId) {
-            clearInterval(interval); // Detener el intervalo si no hay un ID de QR
-            return;
-        }
-
-        $.ajax({
-            url: '{{ route('wallet.checkQrStatus') }}', // Ruta para consultar el estado del QR
-            type: 'POST',
-            data: {
-                _token: '{{ csrf_token() }}',
-                qrId: qrId // Enviar el ID del QR generado
-            },
-            success: function(response) {
-                const statusId = response.statusId; // Obtener el estado del QR
-
-                // Mostrar el estado actual en la vista
-                $('#qrStatus').text(`Estado del QR: ${statusId}`);
-
-                if (statusId === 2) { // Si el estado es "Usado"
-                    alert('QR usado. Saldo agregado a la billetera.');
-                    clearInterval(interval); // Detener la consulta automática
-                    // Aquí puedes agregar el saldo a la billetera
-                    // Obtener la cantidad del input (o puedes usar una variable si ya tienes el monto guardado)
-                    // Obtener el valor del input de amount
-                    const amount = document.getElementById('amount').value;
-
-                    if (!amount) {
-                        alert('Error: el monto no está definido.');
-                        return;
+        // Función para generar el QR
+        function generateQr(amount) {
+            $.ajax({
+                url: '{{ route('wallet.generateQr') }}', // Ruta para generar el QR
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}', // Token CSRF para seguridad
+                    amount: amount // Monto capturado del formulario
+                },
+                success: function(response) {
+                    if (response.qrCode) {
+                        // Mostrar el código QR generado
+                        $('#qrCodeContainer').html(
+                            `<img src="data:image/png;base64,${response.qrCode}" alt="QR Code">`);
+                        qrId = response.qrId; // Guardar el ID del QR generado
+                        startQrStatusCheck(); // Iniciar la consulta automática del estado
                     }
-
-                    // Realizar la solicitud AJAX para agregar el saldo a la billetera
-                    $.ajax({
-                        url: '{{ route('wallet.addCredit') }}',
-                        type: 'POST',
-                        data: {
-                            _token: '{{ csrf_token() }}', // Asegúrate de incluir el token CSRF
-                            amount: amount
-                        },
-                        success: function(response) {
-                            alert('Fondos añadidos correctamente.');
-                            // Puedes hacer un refresh de la página o actualizar el saldo en la interfaz
-                            location.reload(); // Recargar la página
-                        },
-                        error: function(xhr, status, error) {
-                            console.error('Error al agregar los fondos:', error);
-                            alert('Hubo un error al agregar los fondos.');
-                        }
-                    });
-                    window.location.reload(); // Refrescar la página o redirigir
-                } else if (statusId === 3) { // Si el estado es "Expirado"
-                    alert('El QR ha expirado.');
-                    clearInterval(interval); // Detener la consulta automática
-                    window.location.reload(); // Refrescar la página
-                } else if (statusId === 4) { // Si el estado es "Error"
-                    alert('Hubo un error con el código QR.');
-                    clearInterval(interval); // Detener la consulta automática
+                },
+                error: function(error) {
+                    alert('Error al generar el código QR');
                 }
-                // Si el estado es 1 (No Usado), sigue consultando
-            },
-            error: function(error) {
-                alert('Error al consultar el estado del código QR');
-                clearInterval(interval); // Detener la consulta en caso de error
-            }
-        });
-    }
-</script>
+            });
+        }
 
+        // Función para iniciar la consulta automática del estado del QR
+        function startQrStatusCheck() {
+            const interval = setInterval(function() {
+                checkQrStatus(interval); // Llamar a la función para consultar el estado
+            }, 10000); // Consultar cada 10 segundos
+        }
+
+        // Función para consultar el estado del QR
+        function checkQrStatus(interval) {
+            if (!qrId) {
+                clearInterval(interval); // Detener el intervalo si no hay un ID de QR
+                return;
+            }
+
+            $.ajax({
+                url: '{{ route('wallet.checkQrStatus') }}', // Ruta para consultar el estado del QR
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    qrId: qrId // Enviar el ID del QR generado
+                },
+                success: function(response) {
+                    const statusId = response.statusId; // Obtener el estado del QR
+
+                    // Mostrar el estado actual en la vista
+                    $('#qrStatus').text(`Estado del QR: ${statusId}`);
+
+                    if (statusId === 2) { // Si el estado es "Usado"
+                        alert('QR usado. Saldo agregado a la billetera.');
+                        clearInterval(interval); // Detener la consulta automática
+                        // Aquí puedes agregar el saldo a la billetera
+                        // Obtener la cantidad del input (o puedes usar una variable si ya tienes el monto guardado)
+                        // Obtener el valor del input de amount
+                        const amount = document.getElementById('amount').value;
+
+                        if (!amount) {
+                            alert('Error: el monto no está definido.');
+                            return;
+                        }
+
+                        // Realizar la solicitud AJAX para agregar el saldo a la billetera
+                        $.ajax({
+                            url: '{{ route('wallet.addCredit') }}',
+                            type: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}', // Asegúrate de incluir el token CSRF
+                                amount: amount
+                            },
+                            success: function(response) {
+                                alert('Fondos añadidos correctamente.');
+                                // Puedes hacer un refresh de la página o actualizar el saldo en la interfaz
+                                location.reload(); // Recargar la página
+                            },
+                            error: function(xhr, status, error) {
+                                console.error('Error al agregar los fondos:', error);
+                                alert('Hubo un error al agregar los fondos.');
+                            }
+                        });
+                        window.location.reload(); // Refrescar la página o redirigir
+                    } else if (statusId === 3) { // Si el estado es "Expirado"
+                        alert('El QR ha expirado.');
+                        clearInterval(interval); // Detener la consulta automática
+                        window.location.reload(); // Refrescar la página
+                    } else if (statusId === 4) { // Si el estado es "Error"
+                        alert('Hubo un error con el código QR.');
+                        clearInterval(interval); // Detener la consulta automática
+                    }
+                    // Si el estado es 1 (No Usado), sigue consultando
+                },
+                error: function(error) {
+                    alert('Error al consultar el estado del código QR');
+                    clearInterval(interval); // Detener la consulta en caso de error
+                }
+            });
+        }
+    </script>
+@endsection
 
 @endsection

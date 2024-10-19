@@ -18,14 +18,15 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-        $this->call(DataRowsTableSeeder::class);
         $this->call(DataTypesTableSeeder::class);
-        $this->call(MenuItemsTableSeeder::class);
+        $this->call(DataRowsTableSeeder::class);
+        $this->call(MenusTableSeeder::class); // Asegúrate de tener este seeder
+        $this->call(RolesTableSeeder::class);
         $this->call(PermissionsTableSeeder::class);
         $this->call(PermissionRoleTableSeeder::class);
-        $this->call(ProductsTableSeeder::class);
-        $this->call(RolesTableSeeder::class);
-        $this->call(SettingsTableSeeder::class);
         $this->call(UsersTableSeeder::class);
+        $this->call(MenuItemsTableSeeder::class);
+        $this->call(ProductsTableSeeder::class);
+        $this->call(SettingsTableSeeder::class);
     }
 }
