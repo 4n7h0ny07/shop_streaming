@@ -118,7 +118,7 @@
         // Función para generar el QR
         function generateQr(amount) {
             $.ajax({
-                url: '{{ route('wallet.generateQr') }}', // Ruta para generar el QR
+                url: '{{ route("wallet.generateQr") }}', // Ruta para generar el QR
                 type: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}', // Token CSRF para seguridad
@@ -164,24 +164,22 @@
                     const statusId = response.statusId; // Obtener el estado del QR
 
                     // Mostrar el estado actual en la vista
-                    $('#qrStatus').text(`Estado del QR: ${statusId}`);
+                    $('#qrStatus').text(`Esperando que se use el codigo Qr para agregar la recarga`);
 
                     if (statusId === 2) { // Si el estado es "Usado"
-                        alert('QR usado. Saldo agregado a la billetera.');
+                        //alert('QR usado. .');
                         clearInterval(interval); // Detener la consulta automática
                         // Aquí puedes agregar el saldo a la billetera
                         // Obtener la cantidad del input (o puedes usar una variable si ya tienes el monto guardado)
-                        // Obtener el valor del input de amount
-                        const amount = document.getElementById('amount').value;
+                        const amount = $('#amount').val();
 
                         if (!amount) {
                             alert('Error: el monto no está definido.');
                             return;
                         }
-
                         // Realizar la solicitud AJAX para agregar el saldo a la billetera
                         $.ajax({
-                            url: '{{ route('wallet.addCredit') }}',
+                            url: '{{ route("wallet.addCredit") }}',
                             type: 'POST',
                             data: {
                                 _token: '{{ csrf_token() }}', // Asegúrate de incluir el token CSRF

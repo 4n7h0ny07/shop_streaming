@@ -1,0 +1,667 @@
+/* Tipografía global */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #261550;
+    color: #ffffff;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Header */
+/* Header */
+header {
+    position: sticky;
+    top: 0;
+    background-color: #ff5722;
+    padding: 20px 0;
+    color: white;
+    z-index: 1000;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80%;
+}
+
+header .logo {
+    position: relative; /* Cambia a relative */
+    margin-bottom: -20px; /* Mantiene esto para que sobresalga hacia abajo */
+    margin-left: 50px; /* Ajusta este valor para mover el logo a la derecha */
+}
+
+header .logo img {
+    height: 150px; /* Ajusta la altura según sea necesario */
+    margin-bottom: -100px; /* Asegura que el logo sobresalga hacia abajo */
+}
+
+header .logo h1 {
+    margin: 0px;
+    font-size: 1.8em;
+    color: white;
+}
+
+header nav {
+    position: relative; /* Para manejar el menú desplegable */
+}
+
+header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex; /* Muestra el menú en fila en pantallas grandes */
+}
+
+header nav ul li {
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    color: white;
+    font-weight: 700;
+}
+
+/* Estilos para el botón de menú */
+.menu-toggle {
+    display: none; /* Oculta el botón de menú por defecto */
+    flex-direction: column;
+    cursor: pointer;
+    margin-right: 50px; /* Alinea el botón de menú a la derecha */
+}
+
+.bar {
+    height: 3px;
+    width: 25px;
+    background-color: white;
+    margin: 3px 0; /* Espaciado entre las barras */
+}
+
+/* Media Queries para Responsividad */
+@media (max-width: 768px) {
+    header nav ul {
+        display: none; /* Oculta el menú en dispositivos pequeños */
+        flex-direction: column; /* Muestra el menú en columna */
+        position: absolute; /* Necesario para posicionar el menú */
+        top: 70px; /* Posiciona debajo del encabezado */
+        left: 0;
+        background-color: #ff5722; /* Color del fondo del menú */
+        width: 100%; /* Ancho completo */
+    }
+
+    header nav ul.show {
+        display: flex; /* Muestra el menú al hacer clic */
+    }
+
+    .menu-toggle {
+        display: flex; /* Muestra el botón de menú en dispositivos pequeños */
+    }
+
+    header .logo {
+        margin-left: auto; /* Alinea el logo al centro en pantallas pequeñas */
+        margin-right: auto; /* Alinea el logo al centro en pantallas pequeñas */
+    }
+}
+
+.cta {
+    display: flex;
+    align-items: center; /* Alinear el botón */
+}
+
+.cta .btn {
+    margin-left: 15px; /* Espaciado entre botones */
+    padding: 10px 20px;
+    background-color: white;
+    color: #ff5722;
+    border: none;
+    border-radius: 5px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.cta .btn:hover {
+    background-color: #f1f1f1;
+}
+
+/*botones*/
+.btn-default {
+    background-color: #4e4e4e; /* Color del botón */
+    padding: 15px 30px;
+    border-radius: 25px;
+    text-decoration: none; /* Asegúrate de que no haya subrayado */
+
+}
+.btn-primary {
+    background-color: #150a75; /* Color del botón */
+    padding: 15px 30px;
+    border-radius: 25px;
+    text-decoration: none; /* Asegúrate de que no haya subrayado */
+}
+.btn-success {
+    background-color: #017c1c; /* Color del botón */
+    padding: 15px 30px;
+    border-radius: 25px;
+    text-decoration: none; /* Asegúrate de que no haya subrayado */
+}
+.btn-warning {
+    background-color: #e26600; /* Color del botón */
+    padding: 15px 30px;
+    border-radius: 25px;
+    text-decoration: none; /* Asegúrate de que no haya subrayado */
+}
+.btn-danger {
+    background-color: #d3000000; /* Color del botón */
+    border: 0.1em solid #d30000;
+    padding: 15px 30px;
+    border-radius: 25px;
+    text-decoration: none; /* Asegúrate de que no haya subrayado */
+}
+
+.btn-danger:hover{
+    background-color: #d30000;
+    border: 0.1em solid #810101;
+}
+
+header .cta .btn {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    padding-right: 45px;
+}
+
+/* Hero Section */
+.hero {
+    background-color: #261550; /* Color de fondo si la imagen no carga */
+    background: url('../images/portada.jpg') center center no-repeat;
+    background-size: cover;    
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    position: relative; /* Necesario para posicionar el overlay */
+}
+
+.hero .overlay {
+    position: absolute; /* Coloca el overlay en la misma posición que el contenedor */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(38, 21, 80, 0.719); /* Color con 50% de opacidad */
+    z-index: 1; /* Asegúrate de que el overlay esté encima de la imagen */
+}
+
+.hero .content {
+    position: relative; /* Permite que el contenido esté por encima del overlay */
+    z-index: 2; /* Coloca el contenido por encima del overlay */
+}
+
+.hero h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+
+.hero .btn {
+    background-color: #ffeb3b; /* Color del botón */
+    color: #333; /* Color del texto del botón */
+    padding: 15px 30px;
+    border-radius: 25px;
+    text-decoration: none; /* Asegúrate de que no haya subrayado */
+}
+
+/* Services Section */
+.services {
+    /* background-color: #ffffff; */
+    padding: 50px 0;
+    text-align: center;
+}
+
+.services .container {
+    max-width: auto !important;
+    margin: 0 auto;
+}
+
+.services h2 {
+    font-size: 2.2em;
+    margin-bottom: 40px;
+}
+
+.slider {
+    overflow: hidden;
+    display: flex;
+    white-space: nowrap;
+}
+
+.slider-track {
+    display: flex;
+    white-space: nowrap;
+    justify-content: space-around;
+    will-change: transform; 
+    animation: scroll 10s linear infinite;
+    /* animation-delay:  calc(10s / -2); */
+}
+.slide {
+    min-width: 100%; /* Asegúrate de que cada slide ocupe el 100% del contenedor */
+    box-sizing: border-box; /* Para incluir padding y border en el ancho */
+}
+.service-card {
+    flex: 0 0 30%;
+    /* background-color: #f8f9fa; */
+    padding: 10px;
+    border-radius: 15px;
+    text-align: center;
+    margin: 0 50px;
+}
+
+.service-card img {
+    max-width: 200px;
+    margin-bottom: 15px;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    
+    100% {
+        transform: translateX(-150%);
+    }
+
+}
+
+
+
+/* Pricing Section */
+.pricing {
+    /* background-color: #ffffff; */
+    padding: 50px 0;
+    text-align: center;
+}
+
+.pricing .container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.pricing h2 {
+    font-size: 2.2em;
+    margin-bottom: 40px;
+}
+
+.pricing-grid {
+    display: flex;
+    gap: 20px;
+}
+
+.pricing-card {
+    flex: 1;
+    /* background-color: #ffffff; */
+    padding: 30px;
+    border-radius: 15px;
+    border: 3px solid #ff5722;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.pricing-card.highlight {
+    background-color: #ff5722;
+    color: #fff;
+}
+
+.pricing-card .recommend-label {
+    background-color: #ff5722;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 0.9em;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+h3 .highlight {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    background-color: #ff5722;
+    
+}
+.pricing-card h3 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    
+}
+
+.pricing-card .price {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.pricing-card ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 30px;
+}
+
+.pricing-card ul li {
+    margin-bottom: 10px;
+}
+
+.pricing-card .btn {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+}
+
+/* Informational Section */
+ .info {
+    background-color: #f1f1f1;
+    padding: 50px 0;
+    text-align: center;
+}
+
+/*.info .container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.info h2 {
+    font-size: 2.2em;
+    margin-bottom: 20px;
+}
+
+.info p {
+    font-size: 1.2em;
+} */
+
+/* Sección Por qué Elegirnos */
+.why-choose-us {
+    position: relative; /* Necesario para el overlay */
+    padding: 75px 0;
+    background-size: cover;
+    background-position: center;
+    background-color: #000; /* Fondo en caso de que la imagen no cargue */
+}
+
+.why-choose-us .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(38, 21, 80, 0.808); /* Color con 50% de opacidad */
+    z-index: 1; /* Coloca el overlay encima de la imagen */
+}
+
+.why-choose-us .container {
+    position: relative;
+    z-index: 2; /* Coloca el contenido por encima del overlay */
+    max-width: 720px; /* Aumentado para dar más espacio al carrusel */
+    margin: 0 auto;
+}
+
+.why-choose-us h2 {
+    font-size: 2.2em;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #fff;
+}
+
+/* Swiper container ajustado para ocupar todo el ancho del contenedor */
+.swiper-container {
+    width: 100%;
+    height: auto; /* Ajustamos la altura para que se ajuste al contenido */
+    overflow: hidden; /* Evitamos el desbordamiento */
+}
+
+.swiper-wrapper {
+    display: flex;
+}
+
+.swiper-slide {
+    display: flex;
+    flex-direction: column; /* Aseguramos que el contenido esté en columnas, no en fila */
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0); /* Fondo semitransparente para cada slide */
+    border-radius: 15px;
+    flex-shrink: 0; /* Evitamos que los slides se reduzcan */
+    width: 100%; /* Cada slide ocupa el 100% del contenedor */
+}
+
+/* Paginación centrada */
+.swiper-pagination {
+    bottom: 10px;
+    text-align: center;
+}
+
+/* Botones de navegación */
+.swiper-button-next,
+.swiper-button-prev {
+    color: white; /* Cambia el color de los botones de navegación */
+}
+
+/* Tarjeta personalizada para cada slide */
+.choose-us-card {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-direction: row; /* Asegura que la imagen esté al lado del texto */
+    color: #fff;
+}
+
+.choose-us-card .image-content {
+    flex: 0 0 40%; /* La imagen ocupará el 40% del ancho */
+    max-width: 40%; /* Evita que la imagen sea más grande del 40% */
+    padding-right: 20px; /* Añade espacio entre la imagen y el texto */
+}
+
+.choose-us-card .text-content {
+    flex: 1; /* El texto ocupa el resto del espacio */
+    padding: 20px;
+    word-wrap: break-word; /* Rompe las palabras largas para evitar desbordamientos */
+    overflow-wrap: break-word; /* Rompe las palabras largas de forma más eficiente */
+}
+
+.choose-us-card img {
+    max-width: 100%;
+    border-radius: 15px;
+}
+
+
+
+
+/* Offers Section */
+.offers {
+    padding: 50px 0;
+    /* background-color: #f0f0f0; Fondo gris claro para la sección */
+}
+
+.offers h2 {
+    font-size: 2.2em;
+    text-align: center;
+    margin-bottom: 40px;
+   
+}
+
+/* Contenedor de tarjetas centradas */
+.offer-grid {
+    display: flex; /* Usar flexbox para alinear horizontalmente */
+    justify-content: center; /* Centrar las tarjetas horizontalmente */
+    flex-wrap: wrap; /* Permite que las tarjetas se ajusten a diferentes tamaños de pantalla */
+    gap: 20px; /* Espacio entre las tarjetas */
+}
+
+.offer-card {
+    background-color: transparent; /* Fondo transparente para el card */
+    border-radius: 10px;
+    overflow: hidden;
+    border: 3px solid #ff5722;
+    box-shadow: 0 4px 8px  #ff56228f;
+    flex: 0 1 18%; /* Ancho fijo con flex-grow y flex-shrink */
+    max-width: 300px; /* Establecer un ancho máximo para las tarjetas */
+    margin: 10px; /* Espaciado entre tarjetas */
+    transform: translateY(20px);
+    opacity: 0;
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+/* Estilo de imagen en la parte superior */
+.offer-card img {
+    width: 100%;
+    height: auto; /* Asegura que la imagen ocupe el 100% de la altura */
+    object-fit: cover; /* Mantiene la relación de aspecto de la imagen y llena el espacio */
+}
+
+.offer-card .text-content {
+    padding: 20px;
+    text-align: center;
+    background-color: #ff5722;
+    width: auto;
+    height: 100%; /* Asegura que la imagen ocupe el 100% de la altura */
+}
+
+.offer-card .text-content h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    
+}
+
+.offer-card .text-content p {
+    font-size: 1em;
+    
+}
+
+/* Animación CSS */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Agregar un retraso en la animación para cada tarjeta */
+.offer-card:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.offer-card:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.offer-card:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.offer-card:nth-child(4) {
+    animation-delay: 0.8s;
+}
+
+.offer-card:nth-child(5) {
+    animation-delay: 1s;
+}
+
+
+/* Faq Sections*/
+.faq-section {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .faq-left {
+    flex: 1;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .faq-image {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .faq-title {
+    font-size: 24px;
+    margin-top: 20px;
+  }
+  
+  .faq-right {
+    flex: 2;
+    padding: 20px;
+  }
+  
+  .faq-item {
+    margin-bottom: 15px;
+  }
+  
+  .faq-question {
+    display: block;
+    /*background-color: #ff5722;*/
+    /* background: linear-gradient(to right, red, yellow, green); */
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    padding-left: 10px;
+    background-color: #f1f1f1;
+    color: black;
+    transition: max-height 0.3s ease;
+    border-left: 3px solid #ff5722;;
+  }
+  
+  .faq-radio {
+    display: none;
+  }
+  
+  .faq-radio:checked + .faq-question + .faq-answer {
+    max-height: 200px; /* Ajusta el valor según el contenido */
+    padding: 10px;
+  }
+  
+  /* Estilo para que las demás preguntas se cierren al abrir una */
+  .faq-radio:not(:checked) + .faq-question + .faq-answer {
+    max-height: 0;
+    padding: 0;
+    border-left: none;
+  }
+  
+  /* Ajuste opcional para resaltar la pregunta abierta */
+  .faq-radio:checked + .faq-question {
+    background-color: #ff5722;
+  }
+  
+  
+  
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WalletController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\SuscripcionController;
 
 /*
@@ -16,12 +17,22 @@ use App\Http\Controllers\SuscripcionController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
+
+Route::get('login', function () {
+    return redirect('admin/login');
+})->name('login');
+
+// Ruta para mostrar el formulario de registro
+Route::get('/register', [Controller::class, 'showRegister'])->name('register');
+Route::post('/register', [Controller::class, 'register']);
 
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
+
+    Route::post('/wallet/generate-qr', [Controller::class, 'generateQr'])->name('wallet.generateQr');
 
     Route::get('/wallet', [WalletController::class, 'index'])->name('wallet.index');
     Route::post('/wallet/generate-qr', [WalletController::class, 'generateQr'])->name('wallet.generateQr');

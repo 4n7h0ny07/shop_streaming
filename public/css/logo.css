@@ -1,0 +1,41 @@
+.logo-stream {
+    display: flex;
+    align-items: center;
+    font-family: 'Arial', sans-serif; /* Puedes cambiar la fuente según tus preferencias */
+    color: #ff5722; /* Color del texto */
+    font-size: 2em; /* Tamaño de la fuente */
+}
+
+.stream-icon {
+    width: 40px; /* Ancho del ícono */
+    height: 40px; /* Alto del ícono */
+    border-radius: 50%; /* Hacerlo redondo */
+    background: linear-gradient(135deg, #ff5722 0%, #ff9800 100%); /* Degradado para el ícono */
+    position: relative;
+    margin-right: 10px; /* Espacio entre el ícono y el texto */
+}
+
+.stream-icon::before,
+.stream-icon::after {
+    content: '';
+    position: absolute;
+    background: white; /* Color del icono de stream */
+}
+
+.stream-icon::before {
+    width: 10px; /* Ancho de la parte superior */
+    height: 25px; /* Alto de la parte superior */
+    border-radius: 5px; /* Bordes redondeados */
+    left: 50%; /* Centrar */
+    bottom: 50%; /* Posición en la parte inferior */
+    transform: translate(-50%, 50%); /* Ajustar el centro */
+}
+
+.stream-icon::after {
+    width: 25px; /* Ancho de la parte inferior */
+    height: 10px; /* Alto de la parte inferior */
+    border-radius: 5px; /* Bordes redondeados */
+    left: 50%; /* Centrar */
+    top: 50%; /* Posición en la parte superior */
+    transform: translate(-50%, -50%); /* Ajustar el centro */
+}

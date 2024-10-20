@@ -30,7 +30,7 @@
                                     <img src="{{ asset('storage/' . $producto->images) }}" class="card-img-top"
                                         alt="{{ $producto->nombre }}"></a>
                             @else
-                                <img src="https://via.placeholder.com/400x200" class="card-img-top"
+                                <img src="{{asset("images/default.png")}}" class="card-img-top"
                                     alt="Imagen no disponible">
                             @endif
                             <a style="text-align:center; font-size:14pt" href="{{ route('shopping.show', $producto->id) }}"> <b

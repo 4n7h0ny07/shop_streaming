@@ -21,10 +21,10 @@
 
                 <div class="card" style="width: 100%; display: flex; align-items: center;">
                     @if ($productos->images)
-                        <img src="{{ asset('storage/' . $productos->images) }}" class="card-img-left"
+                        <img src="{{ asset('storage/' . $productos->images), asset("images/default.png")  }}" class="card-img-left"
                             alt="{{ $productos->nombre }}" style="width: 500px; height: auto; margin-right: 10px;">
                     @else
-                        <img src="https://via.placeholder.com/400x200" class="card-img-left" alt="Imagen de perfil"
+                        <img src="{{asset("images/default.png")}} " class="card-img-left" alt="Imagen de perfil"
                             style="width: 400px; height: auto; margin-right: 10px;" alt="Imagen no disponible">
                     @endif
 
