@@ -61,7 +61,12 @@
                                                     <td>{{ $producto->precio_suscripcion }}</td>
                                                     <!-- Email o algún identificador de la cuenta -->
                                                     {{-- <td>{{ $perfil->nombre_perfil }}</td> <!-- Nombre del perfil --> --}}
-                                                    <td> {{ \Carbon\Carbon::parse($suscripcion->fecha_fin)->locale('es')->translatedFormat('j \\de F \\de Y') }}
+                                                    <td> {{ \Carbon\Carbon::parse($suscripcion->fecha_fin)->locale('es')->translatedFormat('j \\de F \\de Y') }} <br>
+                                                         @if ($suscripcion->fecha_fin <  \Carbon\Carbon::now() )
+                                                            <label class="label label-danger" style="border-radius: 15px;"> Vencío hace {{\Carbon\Carbon::now()->diffInDays($suscripcion->fecha_fin) }} dias </label>
+                                                         @else
+                                                         <label class="label label-success" style="border-radius: 15px;">  Vence en {{\Carbon\Carbon::now()->diffInDays($suscripcion->fecha_fin) }} dias </label>
+                                                         @endif
                                                     </td>
                                                     <!-- Fecha de inicio de la suscripción -->
                                                     <td>

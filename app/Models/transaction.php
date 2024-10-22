@@ -19,10 +19,10 @@ class transaction extends Model
 
     }
 
-    protected static function booted()
-    {
-        static::creating(function ($transaction) {
-            $transaction->user_id = auth()->id();  // Asignar el ID del usuario autenticado
-        });
-    }
+    // protected static function booted()
+    // {
+    //     static::creating(function ($transaction) {
+    //         $transaction->user_id = auth()->id();  // Asignar el ID del usuario autenticado
+    //     });
+    // }
 }

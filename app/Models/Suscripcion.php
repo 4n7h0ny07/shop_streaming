@@ -24,4 +24,16 @@ class Suscripcion extends Model
     {
         return $this->belongsTo(Perfiles::class);
     }
+
+    // Evento para ejecutar antes de crear el registro
+    public static function boot()
+    {
+        parent::boot();
+
+        // Evento para establecer fechas automáticas
+        static::creating(function ($suscripcion) {
+            $suscripcion->fecha_inicio = Carbon::now();
+            $suscripcion->fecha_fin = Carbon::now()->addDays(30);
+        });
+    }
 }
