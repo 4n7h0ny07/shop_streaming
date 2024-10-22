@@ -95,7 +95,7 @@ class SuscripcionController extends Controller
             $perfil = Perfiles::find($request->id);  // Asegúrate de que el perfil existe
             if ($perfil) {
                 $perfil->estado = 'vendido';  // Ajusta el estado según corresponda
-                $perfil->nombre_perfil = $user->name;
+                //$perfil->nombre_perfil = $user->name;
                 $perfil->fecha_vencimiento = $fechaFin;
                 $perfil->save();
             }
