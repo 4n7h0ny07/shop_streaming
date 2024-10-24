@@ -25,7 +25,7 @@
             @auth
                 @if (auth()->user()->role_id === 1)
                     @php
-                        $totalTransacciones = \App\Models\transaction::sum('amount');
+                        $totalTransacciones = \App\Models\transaction::where('type','credit')->sum('amount');
 
                         $totalDebitos = \App\Models\Transaction::where('type', 'debit')->sum('amount');
 
@@ -172,7 +172,8 @@
                             ])
                             ->get();
 
-                        $totalTransacciones = \App\Models\transaction::where('user_id', auth()->id())->sum('amount');
+                        $totalTransacciones = \App\Models\transaction::where('user_id', auth()->id())->where('type', 'credit')->sum('amount');
+                        
                         $totalDebit = \App\Models\Transaction::where('user_id', auth()->id())
                             ->where('type', 'debit')
                             ->sum('amount');
