@@ -22,7 +22,7 @@
                 <div class="panel-body">
 
                     <h2>Historial de Compras</h2>
-                    <div class="table-responsive">
+                    <div class="table-responsive" style="max-height:540px">
                         <table id="dataTable" class="table table-bordered table-hover">
                             <thead>
                                 <tr>

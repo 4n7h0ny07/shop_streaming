@@ -107,7 +107,7 @@ public function renovarPerfil(Request $request, $id)
         }
     }// end function generateToken()
 
-
+// funcion para genrar los codigos Qr
     public function generateQr(Request $request)
     {
         // URL del banco
@@ -123,7 +123,7 @@ public function renovarPerfil(Request $request, $id)
             'gloss' => 'Saldo para ' . $userName,
             'amount' => $request->amount,
             'singleUse' => true,
-            'expirationDate' => now()->addMinutes(15), // Validez de 15 minutos
+            'expirationDate' => now()->addMinutes(5), // Validez de 15 minutos
             'additionalData' => 'Datos Adicionales para identificar el QR',
             'destinationAccountId' => 1,
         ];
@@ -161,6 +161,7 @@ public function renovarPerfil(Request $request, $id)
         }
     }
 
+    // funcion para chequear el estado de los codigos qr generado 
     public function checkQrStatus(Request $request)
     {
         $c_url = env('BANCO_QR_STATUS'); // URL para consultar el estado del QR
@@ -199,6 +200,103 @@ public function renovarPerfil(Request $request, $id)
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+
+
+    //funcion para listas los codigos qr generados 
+
+    public function listQrByDate(Request $request)
+{
+    if ($request->isMethod('post')) {
+        // Lógica para manejar la solicitud POST
+        $c_url = env('BANCO_QR_LIST'); // URL para obtener la lista de QR generados
+        
+        $data = [
+            'generationDate' => $request->input('date'), // La fecha proporcionada por el formulario
+        ];
+
+        try {
+            $token = $this->generateToken(); // Generar el token de autenticación
+
+            if (!$token) {
+                return redirect()->back()->with('error', 'No se pudo obtener el token de autenticación');
+            }
+
+            // Realizar la solicitud POST para obtener los QR generados en la fecha proporcionada
+            $response = Http::withHeaders([
+                'Content-Type' => 'application/json',
+                'Authorization' => 'Bearer ' . $token,
+                'Cache-Control' => 'no-cache',
+            ])->post($c_url, $data);
+                //dd($response);
+            // Procesar la respuesta de la API
+            $responseBody = json_decode($response->body(), true);
+                //dd($responseBody);
+            if (isset($responseBody['dTOqrDetails'])) {
+                // Pasar los datos de QR a la vista
+                return view('qrview.index', [
+                    'qrDetails' => $responseBody['dTOqrDetails'], //dTOqrDetails
+                    'success' => $responseBody['success'],
+                    'message' => $responseBody['message'] ?? null,
+                ]);
+            }
+
+            return redirect()->back()->with('error', 'No se encontraron códigos QR para la fecha proporcionada');
+
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    } else {
+        // Para la solicitud GET: simplemente muestra la vista del formulario
+        return view('qrview.index'); // Nombre de la vista que contiene el formulario
+    }
+}
+
+// funcion para cancelar los codigo qr no usados 
+
+public function cancelQr(Request $request)
+{
+    $c_url = env('BANCO_QR_CANCELATION'); // URL para cancelar el QR
+
+    // Validar que el qrId esté presente en la solicitud
+    $request->validate([
+        'qrId' => 'required|string', // Ajusta el tipo según corresponda
+    ]);
+
+    $data = [
+        'qrId' => $request->qrId, // El ID del QR que se desea cancelar
+    ];
+
+    try {
+        $token = $this->generateToken(); // Generar el token
+
+        if (!$token) {
+            return response()->json(['error' => 'No se pudo obtener el token de autenticación'], 500);
+        }
+
+        // Realizar la solicitud POST para cancelar el QR
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'Authorization' => 'Bearer ' . $token,
+            'Cache-Control' => 'no-cache',
+        ])->post($c_url, $data);
+
+        // Procesar la respuesta de la API
+        $responseBody = json_decode($response->body(), true);
+
+        if (isset($responseBody['success'])) {
+            return response()->json([
+                'success' => $responseBody['success'],
+                'message' => $responseBody['message'] ?? 'QR cancelado exitosamente.',
+            ]);
+        }
+
+        return response()->json(['error' => 'No se pudo cancelar el QR'], 500);
+
+    } catch (\Exception $e) {
+        return response()->json(['error' => $e->getMessage()], 500);
+    }
+}
+
     
     public function show()
     {

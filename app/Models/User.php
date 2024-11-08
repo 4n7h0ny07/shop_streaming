@@ -83,6 +83,12 @@ class User extends \TCG\Voyager\Models\User
         ]);
     }
 
+    // Relación con el modelo Profile
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+
     // Relación con Cuentas
     public function cuentas()
     {

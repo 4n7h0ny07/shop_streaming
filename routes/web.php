@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WalletController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\SuscripcionController;
+use App\Http\Controllers\SmsController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +34,10 @@ Route::post('/register', [Controller::class, 'register']);
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 
+    // Route::post('/qrview', [WalletController::class, 'listQrByDate'])->name('qrlist');
+    Route::match(['get', 'post'], '/qrview', [WalletController::class, 'listQrByDate'])->name('qrlist');
+    Route::post('/cancel-qr', [WalletController::class, 'cancelQr'])->name('cancelQr');
+
     Route::post('/wallet/generate-qr', [Controller::class, 'generateQr'])->name('wallet.generateQr');
 
     Route::get('/wallet', [WalletController::class, 'index'])->name('wallet.index');
@@ -44,10 +50,21 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/wallet/{id}', [WalletController::class, 'obtenerCuenta'])->name('wallet.obtener');
 
     Route::post('/wallet/{id}renovar', [WalletController::class, 'renovarPerfil'])->name('wallet.renovar');
-    
 
     Route::get('/shopping', [SuscripcionController::class, 'index'])->name('shopping.index');
     Route::get('/shopping/{id}/show', [SuscripcionController::class, 'show'])->name('shopping.show');
     Route::post('/shopping/pay', [SuscripcionController::class, 'pay'])->name('perfiles.pay');
-    ;
+
+    // Ruta para mostrar el formulario
+    Route::get('/sms', function () {
+        return view('vendor.voyager.sms.index');
+    })->name('voyager.sms-form');
+
+    // Ruta para enviar el SMS
+    Route::post('/sms', [SmsController::class, 'sendSms'])->name('voyager.send-sms');
+
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+
+   
 });

@@ -110,7 +110,7 @@
                                     <div class="panel" style="heig ">
                                         <h3 class="text-center">Clientes con cuentas Vencidas</h3>
                                         <div class="panel-body">
-                                            <div class="table-responsive">
+                                            <div class="table-responsive" style="max-height:540px">
                                                 <table id="dataTable" class="table table-bordered table-hover">
                                                     <thead>
                                                         <tr>
@@ -249,10 +249,10 @@
                         <div class="col-md-12" style="margin-top: 20px">
                             <div class="row">
                                 <div class="col-md-8">
-                                    <div class="panel" style="heig ">
+                                    <div class="panel">
                                         <h3 class="text-center">Cuentas Vencidas</h3>
                                         <div class="panel-body">
-                                            <div class="table-responsive">
+                                            <div class="table-responsive" style="max-height:540px">
                                                 <table id="dataTable" class="table table-bordered table-hover">
                                                     <thead>
                                                         <tr>

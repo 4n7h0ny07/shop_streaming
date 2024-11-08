@@ -16,12 +16,12 @@
     @include('voyager::alerts')
 
     <div class="row">
-        <div class="col-md-8" height="75px">
+        <div class="col-md-8">
             <div class="panel panel-bordered">
-                <div class="panel-body">
+                <div class="panel-body" >
 
                     <h2>Historial de Transacciones</h2>
-                    <div class="table-responsive">
+                    <div class="table-responsive" style="max-height:540px">
                         <table id="dataTable" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
@@ -64,14 +64,18 @@
         <div class="col-md-4">
             <div class="panel panel-bordered">
                 <div class="panel-body">
-
+                    <h3>Recargar Billetera.?</h3>
                     <form id="qrForm">
-                        <label for="amount">Ingrese el monto para el QR:</label>
-                        <input class="form-control" type="number" id="amount" name="amount" placeholder="Monto"
-                            value="{{ old('amount') }}">
-                        <button class="btn btn-success" type="submit">Generar codigo Qr</button>
-                    </form>
 
+                        <div class="form-inline div-option text-right" id="div-day">
+                            <label for="amount">
+                                <h4>Monto a Recargar:</h4>
+                            </label>
+                            <input class="form-control" type="number" id="amount" name="amount" placeholder="Monto"
+                                value="{{ old('amount') }}">
+                            <button class="btn btn-success" type="submit">Generar codigo Qr</button>
+                        </div>
+                    </form>
                     {{-- <form action="{{ route('wallet.debit') }}" method="POST">
                             @csrf
                             <input class="form-control" type="number" name="amount" placeholder="Monto">
@@ -99,6 +103,7 @@
         <button type="submit">Retirar Fondos</button>
     </form> --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script>
         let qrId = null; // Variable global para almacenar el ID del QR
 
@@ -118,7 +123,7 @@
         // Función para generar el QR
         function generateQr(amount) {
             $.ajax({
-                url: '{{ route("wallet.generateQr") }}', // Ruta para generar el QR
+                url: '{{ route('wallet.generateQr') }}', // Ruta para generar el QR
                 type: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}', // Token CSRF para seguridad
@@ -143,76 +148,78 @@
         function startQrStatusCheck() {
             const interval = setInterval(function() {
                 checkQrStatus(interval); // Llamar a la función para consultar el estado
-            }, 10000); // Consultar cada 10 segundos
+            }, 5000); // Consultar cada 10 segundos
         }
+        
+// Función para consultar el estado del QR
+async function checkQrStatus(interval) {
+    if (!qrId) {
+        clearInterval(interval); // Detener el intervalo si no hay un ID de QR
+        return;
+    }
 
-        // Función para consultar el estado del QR
-        function checkQrStatus(interval) {
-            if (!qrId) {
-                clearInterval(interval); // Detener el intervalo si no hay un ID de QR
-                return;
-            }
+    $.ajax({
+        url: '{{ route("wallet.checkQrStatus") }}', // Ruta para consultar el estado del QR
+        type: 'POST',
+        data: {
+            _token: '{{ csrf_token() }}',
+            qrId: qrId // Enviar el ID del QR generado
+        },
+        success: function(response) {
+            const statusId = response.statusId; // Obtener el estado del QR
 
-            $.ajax({
-                url: '{{ route('wallet.checkQrStatus') }}', // Ruta para consultar el estado del QR
-                type: 'POST',
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    qrId: qrId // Enviar el ID del QR generado
-                },
-                success: function(response) {
-                    const statusId = response.statusId; // Obtener el estado del QR
+            // Mostrar el estado actual en la vista
+            $('#qrStatus').text(`Esperando que se use el codigo Qr para agregar la recarga`);
 
-                    // Mostrar el estado actual en la vista
-                    $('#qrStatus').text(`Esperando que se use el codigo Qr para agregar la recarga`);
+            if (statusId === 2) { // Si el estado es "Usado"
+                //alert('QR usado. .');
+                clearInterval(interval); // Detener la consulta automática
+                // Aquí puedes agregar el saldo a la billetera
+                // Obtener la cantidad del input (o puedes usar una variable si ya tienes el monto guardado)
+                const amount = $('#amount').val();
 
-                    if (statusId === 2) { // Si el estado es "Usado"
-                        //alert('QR usado. .');
-                        clearInterval(interval); // Detener la consulta automática
-                        // Aquí puedes agregar el saldo a la billetera
-                        // Obtener la cantidad del input (o puedes usar una variable si ya tienes el monto guardado)
-                        const amount = $('#amount').val();
-
-                        if (!amount) {
-                            alert('Error: el monto no está definido.');
-                            return;
-                        }
-                        // Realizar la solicitud AJAX para agregar el saldo a la billetera
-                        $.ajax({
-                            url: '{{ route("wallet.addCredit") }}',
-                            type: 'POST',
-                            data: {
-                                _token: '{{ csrf_token() }}', // Asegúrate de incluir el token CSRF
-                                amount: amount
-                            },
-                            success: function(response) {
-                                alert('Fondos añadidos correctamente.');
-                                // Puedes hacer un refresh de la página o actualizar el saldo en la interfaz
-                                location.reload(); // Recargar la página
-                            },
-                            error: function(xhr, status, error) {
-                                console.error('Error al agregar los fondos:', error);
-                                alert('Hubo un error al agregar los fondos.');
-                            }
-                        });
-                        window.location.reload(); // Refrescar la página o redirigir
-                    } else if (statusId === 3) { // Si el estado es "Expirado"
-                        alert('El QR ha expirado.');
-                        clearInterval(interval); // Detener la consulta automática
-                        window.location.reload(); // Refrescar la página
-                    } else if (statusId === 4) { // Si el estado es "Error"
-                        alert('Hubo un error con el código QR.');
-                        clearInterval(interval); // Detener la consulta automática
-                    }
-                    // Si el estado es 1 (No Usado), sigue consultando
-                },
-                error: function(error) {
-                    alert('Error al consultar el estado del código QR');
-                    clearInterval(interval); // Detener la consulta en caso de error
+                if (!amount) {
+                    alert('Error: el monto no está definido.');
+                    return;
                 }
-            });
+                // Realizar la solicitud AJAX para agregar el saldo a la billetera
+                $.ajax({
+                    url: '{{ route("wallet.addCredit") }}',
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}', // Asegúrate de incluir el token CSRF
+                        amount: amount
+                    },
+                    success: function(response) {
+                        //alert('Fondos añadidos correctamente.');
+                        // Puedes hacer un refresh de la página o actualizar el saldo en la interfaz
+                        location.reload(); // Recargar la página
+                    },
+                    error: function(xhr, status, error) {
+                        //console.error('Error al agregar los fondos:', error);
+                        //alert('Hubo un error al agregar los fondos.');
+                        location.reload(); // Recargar la página
+                    }
+                });
+                window.location.reload(); // Refrescar la página o redirigir
+            } else if (statusId === 3) { // Si el estado es "Expirado"
+                alert('El QR ha expirado.');
+                clearInterval(interval); // Detener la consulta automática
+                window.location.reload(); // Refrescar la página
+            } else if (statusId === 4) { // Si el estado es "Error"
+                alert('Hubo un error con el código QR.');
+                clearInterval(interval); // Detener la consulta automática
+            }
+            // Si el estado es 1 (No Usado), sigue consultando
+        },
+        error: function(error) {
+            alert('Error al consultar el estado del código QR');
+            clearInterval(interval); // Detener la consulta en caso de error
         }
+    });
+}
     </script>
+    {{-- <script src="{{ asset('js/jsqr.js') }}"></script> --}}
 @endsection
 
 @endsection
