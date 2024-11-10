@@ -40,10 +40,19 @@
                             '>=',
                             \Carbon\Carbon::now(),
                         )->count();
+
                         // Obtener todos los productos con suscripciones vencidas
                         $productos = \App\Models\Product::with([
                             'cuentas.perfiles.suscripciones' => function ($query) {
                                 $query->where('fecha_fin', '<', \Carbon\Carbon::now()); // Filtra suscripciones vencidas
+                            },
+                            'cuentas.perfiles.suscripciones.user', // Cargar la relación del usuario
+                        ])->get();
+
+                         // Obtener todos los productos con suscripciones vencidas
+                         $productov = \App\Models\Product::with([
+                            'cuentas.perfiles.suscripciones' => function ($query) {
+                                $query->where('fecha_fin', '>', \Carbon\Carbon::now()); // Filtra suscripciones vencidas
                             },
                             'cuentas.perfiles.suscripciones.user', // Cargar la relación del usuario
                         ])->get();
@@ -106,7 +115,7 @@
                     <div class="row">
                         <div class="col-md-12" style="margin-top: 20px">
                             <div class="row">
-                                <div class="col-md-8">
+                                <div class="col-md-6">
                                     <div class="panel" style="heig ">
                                         <h3 class="text-center">Clientes con cuentas Vencidas</h3>
                                         <div class="panel-body">
@@ -142,15 +151,43 @@
                                         </div>
                                     </div>
                                 </div>
-                                {{-- <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="panel">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="panel" style="heig ">
+                                            <h3 class="text-center">Clientes con cuentas Vigentes</h3>
                                             <div class="panel-body">
-
+                                                <div class="table-responsive" style="max-height:540px">
+                                                    <table id="dataTable" class="table table-bordered table-hover">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Vence en</th>
+                                                                <th>Cliente</th>
+                                                                <th>Servicio</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($productov as $product)
+                                                                @foreach ($product->cuentas as $cuenta)
+                                                                    @foreach ($cuenta->perfiles as $perfil)
+                                                                        @foreach ($perfil->suscripciones as $suscripcion)
+                                                                            <tr>
+                                                                                <td><span style="color: #52BE80">
+                                                                                        {{ \Carbon\Carbon::now()->diffInDays($suscripcion->fecha_fin) }}
+                                                                                        dias</span></td>
+                                                                                <td>{{ $suscripcion->user->name }}</td>
+                                                                                <td>{{ $product->nombre }} <br>
+                                                                                    {{ $cuenta->usuario }}</td>
+                                                                            </tr>
+                                                                        @endforeach
+                                                                    @endforeach
+                                                                @endforeach
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div> --}}
+                                </div>
                             </div>
                         </div>
                     </div>
