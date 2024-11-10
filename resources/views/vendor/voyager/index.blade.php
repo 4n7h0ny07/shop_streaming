@@ -25,7 +25,7 @@
             @auth
                 @if (auth()->user()->role_id === 1)
                     @php
-                        $totalTransacciones = \App\Models\transaction::where('type','credit')->sum('amount');
+                        $totalTransacciones = \App\Models\transaction::where('type', 'credit')->sum('amount');
 
                         $totalDebitos = \App\Models\Transaction::where('type', 'debit')->sum('amount');
 
@@ -49,8 +49,8 @@
                             'cuentas.perfiles.suscripciones.user', // Cargar la relación del usuario
                         ])->get();
 
-                         // Obtener todos los productos con suscripciones vencidas
-                         $productov = \App\Models\Product::with([
+                        // Obtener todos los productos con suscripciones vencidas
+                        $productov = \App\Models\Product::with([
                             'cuentas.perfiles.suscripciones' => function ($query) {
                                 $query->where('fecha_fin', '>', \Carbon\Carbon::now()); // Filtra suscripciones vencidas
                             },
@@ -162,7 +162,7 @@
                                             <div class="alert alert-success" role="alert">
                                                 <b>
                                                     <h3 class="text-center"> Clientes con cuentas Vigentes</h3>
-                                      
+
                                                 </b>
                                             </div>
                                             <div class="panel-body">
@@ -197,172 +197,251 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                @else
-                    @php
-                        // Obtener todas las suscripciones vencidas
-                        $user = auth()->user();
-                        $productoCaducado = \App\Models\Product::whereHas('cuentas', function ($query) use ($user) {
-                            $query->whereHas('perfiles', function ($query) use ($user) {
-                                $query->whereHas('suscripciones', function ($query) use ($user) {
-                                    $query->where('user_id', $user->id);
+                    @else
+                        @php
+                            // Obtener todas las suscripciones vencidas
+                            $user = auth()->user();
+                            $productoCaducado = \App\Models\Product::whereHas('cuentas', function ($query) use ($user) {
+                                $query->whereHas('perfiles', function ($query) use ($user) {
+                                    $query->whereHas('suscripciones', function ($query) use ($user) {
+                                        $query->where('user_id', $user->id);
+                                    });
                                 });
-                            });
-                        })
-                            ->with([
-                                'cuentas.perfiles.suscripciones' => function ($query) use ($user) {
-                                    $query->where('user_id', $user->id);
-                                },
-                            ])
-                            ->get();
+                            })
+                                ->with([
+                                    'cuentas.perfiles.suscripciones' => function ($query) use ($user) {
+                                        $query->where('user_id', $user->id);
+                                    },
+                                ])
+                                ->get();
 
-                        $totalTransacciones = \App\Models\transaction::where('user_id', auth()->id())->where('type', 'credit')->sum('amount');
-                        
-                        $totalDebit = \App\Models\Transaction::where('user_id', auth()->id())
-                            ->where('type', 'debit')
-                            ->sum('amount');
-                        $caducadas = \App\Models\Suscripcion::where('fecha_fin', '<', \Carbon\Carbon::now())
-                            ->where('user_id', auth()->id())
-                            ->get();
+                            $productoVigente = \App\Models\Product::whereHas('cuentas', function ($query) use ($user) {
+                                $query->whereHas('perfiles', function ($query) use ($user) {
+                                    $query->whereHas('suscripciones', function ($query) use ($user) {
+                                        $query->where('user_id', $user->id)->where('fecha_fin', '>=', now()); // Verifica que la suscripción esté vigente
+                                    });
+                                });
+                            })
+                                ->with([
+                                    'cuentas.perfiles.suscripciones' => function ($query) use ($user) {
+                                        $query->where('user_id', $user->id)->where('fecha_fin', '>=', now()); // Verifica que la suscripción esté vigente
+                                    }
+                                ])
+                                ->get();
 
-                        // Suscripciones vencidas del usuario actual
-                        $totalVencidas = \App\Models\Suscripcion::where('user_id', auth()->id())
-                            ->where('fecha_fin', '<', \Carbon\Carbon::now())
-                            ->count();
+                            $totalTransacciones = \App\Models\transaction::where('user_id', auth()->id())
+                                ->where('type', 'credit')
+                                ->sum('amount');
 
-                        // Suscripciones vigentes del usuario actual
-                        $totalVigentes = \App\Models\Suscripcion::where('user_id', auth()->id())
-                            ->where('fecha_fin', '>=', \Carbon\Carbon::now())
-                            ->count();
-                    @endphp
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="panel panel-bordered" style="border-left: 5px solid #52BE80">
-                                <div class="panel-body" style="height: 100px;padding: 15px 20px">
-                                    <div class="col-md-9">
-                                        <h5>Total Recargas </h5>
-                                        <h3><small>Bs. </small>{{ number_format($totalTransacciones, 2) }}</h3>
+                            $totalDebit = \App\Models\Transaction::where('user_id', auth()->id())
+                                ->where('type', 'debit')
+                                ->sum('amount');
+                            $caducadas = \App\Models\Suscripcion::where('fecha_fin', '<', \Carbon\Carbon::now())
+                                ->where('user_id', auth()->id())
+                                ->get();
+
+                            $vigentes = \App\Models\Suscripcion::where('fecha_fin', '>', \Carbon\Carbon::now())
+                                ->where('user_id', auth()->id())
+                                ->get();
+
+                            // Suscripciones vencidas del usuario actual
+                            $totalVencidas = \App\Models\Suscripcion::where('user_id', auth()->id())
+                                ->where('fecha_fin', '<', \Carbon\Carbon::now())
+                                ->count();
+
+                            // Suscripciones vigentes del usuario actual
+                            $totalVigentes = \App\Models\Suscripcion::where('user_id', auth()->id())
+                                ->where('fecha_fin', '>=', \Carbon\Carbon::now())
+                                ->count();
+                        @endphp
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="panel panel-bordered" style="border-left: 5px solid #52BE80">
+                                    <div class="panel-body" style="height: 100px;padding: 15px 20px">
+                                        <div class="col-md-9">
+                                            <h5>Total Recargas </h5>
+                                            <h3><small>Bs. </small>{{ number_format($totalTransacciones, 2) }}</h3>
+                                        </div>
+                                        <div class="col-md-3 text-right">
+                                            <i class="icon voyager-wallet" style="color: #52BE80"></i>
+                                        </div>
                                     </div>
-                                    <div class="col-md-3 text-right">
-                                        <i class="icon voyager-wallet" style="color: #52BE80"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="panel panel-bordered" style="border-left: 5px solid #f3101b">
+                                    <div class="panel-body" style="height: 100px;padding: 15px 20px">
+                                        <div class="col-md-9">
+                                            <h5>Total Compras </h5>
+                                            <h3><small>Bs. </small>{{ number_format($totalDebit, 2) }}</h3>
+                                        </div>
+                                        <div class="col-md-3 text-right">
+                                            <i class="icon voyager-dollar" style="color: #f3101b"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="panel panel-bordered" style="border-left: 5px solid #3498DB">
+                                    <div class="panel-body" style="height: 100px;padding: 15px 20px">
+                                        <div class="col-md-9">
+                                            <h5>Suscripciones Vigentes </h5>
+                                            <h3><small>Cant. </small>{{ number_format($totalVigentes, 2) }}</h3>
+                                        </div>
+                                        <div class="col-md-3 text-right">
+                                            <i class="icon voyager-tv" style="color: #3498DB"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="panel panel-bordered" style="border-left: 5px solid #E67E22">
+                                    <div class="panel-body" style="height: 100px;padding: 15px 20px">
+                                        <div class="col-md-9">
+                                            <h5>Suscripciones Vencidas </h5>
+                                            <h3><small>Cant. </small>{{ number_format($totalVencidas, 2) }}</h3>
+                                        </div>
+                                        <div class="col-md-3 text-right">
+                                            <i class="icon voyager-calendar" style="color: #E67E22"></i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="panel panel-bordered" style="border-left: 5px solid #f3101b">
-                                <div class="panel-body" style="height: 100px;padding: 15px 20px">
-                                    <div class="col-md-9">
-                                        <h5>Total Compras </h5>
-                                        <h3><small>Bs. </small>{{ number_format($totalDebit, 2) }}</h3>
-                                    </div>
-                                    <div class="col-md-3 text-right">
-                                        <i class="icon voyager-dollar" style="color: #f3101b"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="panel panel-bordered" style="border-left: 5px solid #3498DB">
-                                <div class="panel-body" style="height: 100px;padding: 15px 20px">
-                                    <div class="col-md-9">
-                                        <h5>Suscripciones Vigentes </h5>
-                                        <h3><small>Cant. </small>{{ number_format($totalVigentes, 2) }}</h3>
-                                    </div>
-                                    <div class="col-md-3 text-right">
-                                        <i class="icon voyager-tv" style="color: #3498DB"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="panel panel-bordered" style="border-left: 5px solid #E67E22">
-                                <div class="panel-body" style="height: 100px;padding: 15px 20px">
-                                    <div class="col-md-9">
-                                        <h5>Suscripciones Vencidas </h5>
-                                        <h3><small>Cant. </small>{{ number_format($totalVencidas , 2) }}</h3>
-                                    </div>
-                                    <div class="col-md-3 text-right">
-                                        <i class="icon voyager-calendar" style="color: #E67E22"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12" style="margin-top: 20px">
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <div class="panel">
-                                        <h3 class="text-center">Cuentas Vencidas</h3>
-                                        <div class="panel-body">
-                                            <div class="table-responsive" style="max-height:540px">
-                                                <table id="dataTable" class="table table-bordered table-hover">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Vencio hace</th>
-                                                            <th>Cliente</th>
-                                                            <th>Servicio</th>
-                                                            <th></th>
-                                                            <th>Acciones</th>
-                                                        </tr>
-                                                    </thead>
+                        <div class="row">
+                            <div class="col-md-12" style="margin-top: 20px">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="panel">
+                                            <div class="alert alert-danger" role="alert">
+                                                <b>
+                                                    <h3 class="text-center"> Cuentas Vencidas </h3>
+                                                </b>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="table-responsive" style="max-height:540px">
+                                                    <table id="dataTable" class="table table-bordered table-hover">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Vencio hace</th>
+                                                                <th>Cliente</th>
+                                                                <th>Servicio</th>
+                                                                <th></th>
+                                                                <th>Acciones</th>
+                                                            </tr>
+                                                        </thead>
 
-                                                    <tbody>
-                                                        @if ($caducadas->count() > 0)
-                                                            @foreach ($productoCaducado as $producto)
-                                                                @foreach ($producto->cuentas as $cuenta)
-                                                                    @foreach ($cuenta->perfiles as $perfil)
-                                                                        @foreach ($perfil->suscripciones as $suscripcion)
-                                                                            <tr>
-                                                                                <td>
-                                                                                    <span style="color: #f3101b">
-                                                                                        {{ \Carbon\Carbon::now()->diffInDays($suscripcion->fecha_fin) }}
-                                                                                        dias</span>
-                                                                                </td>
-                                                                                <td>{{ $suscripcion->user->name }}</td>
-                                                                                <td>{{ $producto->nombre }} <br>
-                                                                                    {{ $cuenta->usuario }}</td>
-                                                                                <td></td>
-                                                                                <td></td>
-                                                                            </tr>
+                                                        <tbody>
+                                                            @if ($caducadas->count() > 0)
+                                                                @foreach ($productoCaducado as $producto)
+                                                                    @foreach ($producto->cuentas as $cuenta)
+                                                                        @foreach ($cuenta->perfiles as $perfil)
+                                                                            @foreach ($perfil->suscripciones as $suscripcion)
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <span style="color: #f3101b">
+                                                                                            {{ \Carbon\Carbon::now()->diffInDays($suscripcion->fecha_fin) }}
+                                                                                            dias</span>
+                                                                                    </td>
+                                                                                    <td>{{ $suscripcion->user->name }}</td>
+                                                                                    <td>{{ $producto->nombre }} <br>
+                                                                                        {{ $cuenta->usuario }}</td>
+                                                                                    <td></td>
+                                                                                    <td></td>
+                                                                                </tr>
+                                                                            @endforeach
                                                                         @endforeach
                                                                     @endforeach
                                                                 @endforeach
-                                                            @endforeach
-                                                        @else
-                                                            <tr>
-                                                                <td colspan="5">
-                                                                    <div class="alert alert-info" role="alert">
-                                                                        <b>
-                                                                            <h3 class="text-center"> No hay datos para mostrar
-                                                                            </h3>
-                                                                        </b>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                        @endif
-                                                    </tbody>
-                                                </table>
+                                                            @else
+                                                                <tr>
+                                                                    <td colspan="5">
+                                                                        <div class="alert alert-info" role="alert">
+                                                                            <b>
+                                                                                <h3 class="text-center"> No hay datos para
+                                                                                    mostrar
+                                                                                </h3>
+                                                                            </b>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            @endif
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="panel">
+                                                <div class="alert alert-success" role="alert">
+                                                    <b>
+                                                        <h3 class="text-center"> Cuentas Vigentes  </h3>
+                                                    </b>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <div class="table-responsive" style="max-height:540px">
+                                                        <table id="dataTable" class="table table-bordered table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Vence en</th>
+                                                                    <th>Cliente</th>
+                                                                    <th>Servicio</th>
+                                                                    <th></th>
+                                                                    <th>Acciones</th>
+                                                                </tr>
+                                                            </thead>
+
+                                                            <tbody>
+                                                                @if ($vigentes->count() > 0)
+                                                                    @foreach ($productoVigente as $producto)
+                                                                        @foreach ($producto->cuentas as $cuenta)
+                                                                            @foreach ($cuenta->perfiles as $perfil)
+                                                                                @foreach ($perfil->suscripciones as $suscripcion)
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <span style="color: #52BE80">
+                                                                                                {{ \Carbon\Carbon::now()->diffInDays($suscripcion->fecha_fin) }}
+                                                                                                dias</span>
+                                                                                        </td>
+                                                                                        <td>{{ $suscripcion->user->name }}</td>
+                                                                                        <td>{{ $producto->nombre }} <br>
+                                                                                            {{ $cuenta->usuario }}</td>
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                    </tr>
+                                                                                @endforeach
+                                                                            @endforeach
+                                                                        @endforeach
+                                                                    @endforeach
+                                                                @else
+                                                                    <tr>
+                                                                        <td colspan="5">
+                                                                            <div class="alert alert-info" role="alert">
+                                                                                <b>
+                                                                                    <h3 class="text-center"> No hay datos para
+                                                                                        mostrar
+                                                                                    </h3>
+                                                                                </b>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                @endif
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                {{-- <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="panel">
-                                            <div class="panel-body">
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> --}}
                             </div>
                         </div>
-                    </div>
                 @endif
 
             @endauth
