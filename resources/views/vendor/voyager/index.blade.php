@@ -113,10 +113,10 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12" style="margin-top: 20px">
+                        <div class="col-md-12" style="margin-top: 10px">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="panel" style="heig ">
+                                    <div class="panel">
                                         <div class="alert alert-danger" role="alert">
                                             <b>
                                                 <h3 class="text-center"> Clientes con cuentas Vencidas
@@ -158,7 +158,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <div class="panel" style="heig ">
+                                        <div class="panel" >
                                             <div class="alert alert-success" role="alert">
                                                 <b>
                                                     <h3 class="text-center"> Clientes con cuentas Vigentes</h3>
@@ -313,13 +313,13 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12" style="margin-top: 20px">
+                            <div class="col-md-12" style="margin-top: 10px">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="panel">
                                             <div class="alert alert-danger" role="alert">
                                                 <b>
-                                                    <h3 class="text-center"> Cuentas Vencidas </h3>
+                                                     <h3 class="text-center"> Cuentas Vencidas  </h3>
                                                 </b>
                                             </div>
                                             <div class="panel-body">
@@ -328,9 +328,8 @@
                                                         <thead>
                                                             <tr>
                                                                 <th>Vencio hace</th>
-                                                                <th>Cliente</th>
-                                                                <th>Servicio</th>
-                                                                <th></th>
+                                                                <th>Producto</th>
+                                                                <th>Cuenta</th>                                                                
                                                                 <th>Acciones</th>
                                                             </tr>
                                                         </thead>
@@ -347,10 +346,8 @@
                                                                                             {{ \Carbon\Carbon::now()->diffInDays($suscripcion->fecha_fin) }}
                                                                                             dias</span>
                                                                                     </td>
-                                                                                    <td>{{ $suscripcion->user->name }}</td>
-                                                                                    <td>{{ $producto->nombre }} <br>
-                                                                                        {{ $cuenta->usuario }}</td>
-                                                                                    <td></td>
+                                                                                    <td>{{ $producto->nombre }}</td>
+                                                                                    <td>{{ $cuenta->usuario }}</td>
                                                                                     <td></td>
                                                                                 </tr>
                                                                             @endforeach
@@ -390,9 +387,8 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th>Vence en</th>
-                                                                    <th>Cliente</th>
-                                                                    <th>Servicio</th>
-                                                                    <th></th>
+                                                                    <th>Producto</th>
+                                                                    <th>Cuenta</th>
                                                                     <th>Acciones</th>
                                                                 </tr>
                                                             </thead>
@@ -409,10 +405,8 @@
                                                                                                 {{ \Carbon\Carbon::now()->diffInDays($suscripcion->fecha_fin) }}
                                                                                                 dias</span>
                                                                                         </td>
-                                                                                        <td>{{ $suscripcion->user->name }}</td>
-                                                                                        <td>{{ $producto->nombre }} <br>
-                                                                                            {{ $cuenta->usuario }}</td>
-                                                                                        <td></td>
+                                                                                        <td>{{ $producto->nombre }}</td>
+                                                                                        <td> {{ $cuenta->usuario }}</td>
                                                                                         <td></td>
                                                                                     </tr>
                                                                                 @endforeach
