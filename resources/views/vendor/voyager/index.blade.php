@@ -117,7 +117,12 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="panel" style="heig ">
-                                        <h3 class="text-center">Clientes con cuentas Vencidas</h3>
+                                        <div class="alert alert-danger" role="alert">
+                                            <b>
+                                                <h3 class="text-center"> Clientes con cuentas Vencidas
+                                                </h3>
+                                            </b>
+                                        </div>
                                         <div class="panel-body">
                                             <div class="table-responsive" style="max-height:540px">
                                                 <table id="dataTable" class="table table-bordered table-hover">
@@ -154,7 +159,12 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="panel" style="heig ">
-                                            <h3 class="text-center">Clientes con cuentas Vigentes</h3>
+                                            <div class="alert alert-success" role="alert">
+                                                <b>
+                                                    <h3 class="text-center"> Clientes con cuentas Vigentes</h3>
+                                      
+                                                </b>
+                                            </div>
                                             <div class="panel-body">
                                                 <div class="table-responsive" style="max-height:540px">
                                                     <table id="dataTable" class="table table-bordered table-hover">
