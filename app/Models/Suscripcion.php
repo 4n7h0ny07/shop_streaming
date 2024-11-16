@@ -5,8 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
-use Carbon\Carbon; // Asegúrate de importar la clase Carbon
+
 use App\Models\Perfiles;
+use Carbon\Carbon; // Asegúrate de importar la clase Carbon
 
 class Suscripcion extends Model
 {
