@@ -61,38 +61,38 @@ class SendSubscriptionReminder extends Command
         $this->info('Mensajes de recordatorio enviados con éxito.');
     }
 
-    private function sendSms($numeroTelefono, $mensaje)
-    {
-        $this->info("Enviando SMS a: {$numeroTelefono}");
-        $sid = env('TWILIO_SID');
-        $token = env('TWILIO_AUTH_TOKEN');
-        $twilioNumber = env('TWILIO_PHONE_NUMBER');
+    // private function sendSms($numeroTelefono, $mensaje)
+    // {
+    //     $this->info("Enviando SMS a: {$numeroTelefono}");
+    //     $sid = env('TWILIO_SID');
+    //     $token = env('TWILIO_AUTH_TOKEN');
+    //     $twilioNumber = env('TWILIO_PHONE_NUMBER');
 
-        $client = new Client($sid, $token);
+    //     $client = new Client($sid, $token);
 
-        try {
-            $client->messages->create(
-                $numeroTelefono,
-                [
-                    'from' => $twilioNumber,
-                    'body' => $mensaje,
-                ]
-            );
-        } catch (\Exception $e) {
-            $this->error('Error al enviar el SMS: ' . $e->getMessage());
-        }
-    }
+    //     try {
+    //         $client->messages->create(
+    //             $numeroTelefono,
+    //             [
+    //                 'from' => $twilioNumber,
+    //                 'body' => $mensaje,
+    //             ]
+    //         );
+    //     } catch (\Exception $e) {
+    //         $this->error('Error al enviar el SMS: ' . $e->getMessage());
+    //     }
+    // }
 
     private function sendEmail($email, $nombreUsuario, $mensaje)
-{
-    $this->info("Enviando correo electrónico a: {$email}"); // Depuración
-
-    try {
-        Mail::send('emails.subscription-reminder', ['nombreUsuario' => $nombreUsuario, 'mensaje' => $mensaje], function ($message) use ($email) {
-            $message->to($email)->subject('Recordatorio de Suscripción - TV Streaming Fassid');
-        });
-    } catch (\Exception $e) {
-        $this->error('Error al enviar el correo electrónico: ' . $e->getMessage());
+    {
+        $this->info("Enviando correo electrónico a: {$email}"); // Depuración
+    
+        try {
+            Mail::send('emails.subscription-reminder', ['nombreUsuario' => $nombreUsuario, 'mensaje' => $mensaje], function ($message) use ($email) {
+                $message->to($email)->subject('Recordatorio de Suscripción - TV Streaming Fassid');
+            });
+        } catch (\Exception $e) {
+            $this->error('Error al enviar el correo electrónico: ' . $e->getMessage());
+        }
     }
-}
 }

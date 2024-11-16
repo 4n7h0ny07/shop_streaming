@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modelo Inspirado en Netflix</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Mi Plataforma</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Series</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Películas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Mi lista</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+<!-- Página de Contacto -->
+<section class="container my-5">
+    <h2 class="mb-4 text-center">Contacto</h2>
+    <div class="row">
+        <!-- Mapa de Ubicación -->
+        <div class="col-md-6">
+            <h4>Ubicación</h4>
+            <div class="embed-responsive embed-responsive-16by9">
+                <!-- Inserta aquí tu mapa de Google o mapa embebido -->
+                <iframe class="embed-responsive-item" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3651.1924017574996!2d-46.57402178460147!3d-23.594047084624436!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce5d3af0b4f9f1%3A0x64772e7c9a9fd06d!2sAv.%20Paulista%2C%20447%20-%20Bela%20Vista%2C%20S%C3%A3o%20Paulo%2C%20SP%2C%2001304-001%2C%20Brasil!5e0!3m2!1ses-419!2ses!4v1622777262119!5m2!1ses-419!2ses" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+        <!-- Formulario de Contacto -->
+        <div class="col-md-6">
+            <h4>Formulario de Contacto</h4>
+            <form>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="name" placeholder="Tu nombre">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Correo Electrónico</label>
+                    <input type="email" class="form-control" id="email" placeholder="Tu correo electrónico">
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label">Mensaje</label>
+                    <textarea class="form-control" id="message" rows="4" placeholder="Tu mensaje"></textarea>
+                </div>
+                <button type="submit" class="btn btn-danger">Enviar</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2024 Mi Plataforma. Todos los derechos reservados.</p>
+    <a href="terminos-uso.html">Términos y condiciones de uso</a> | <a href="politicas-privacidad.html">Política de privacidad</a> | <a href="quienes-somos.html">Quienes Somos</a> | <a href="contacto.html">Contactanos</a> | <a href="terminos-reembolso.html">Política de garantias y reembolso</a> | <a
+        href="faq.html">Preguntas frecuentes</a>
+</footer>
+
+
+<!-- Scripts -->
+<script src="js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

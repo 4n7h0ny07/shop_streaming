@@ -19,12 +19,24 @@ use App\Http\Controllers\ProfileController;
 */
 
 Route::get('/', function () {
-    return view('index');
-});
+    return view('page.default.index', ['page' => 'index']);
+})->name('index');
 
-Route::get('login', function () {
-    return redirect('admin/login');
+Route::get('/mastv', function () {
+    return view('page.default.mastv', ['page' => 'mastv']);
+})->name('mastv');
+
+Route::get('/flujotv', function () {
+    return view('page.default.flujotv', ['page' => 'flujotv']);
+})->name('flujotv');
+
+Route::get('/login', function () {
+    return view('page.default.login');
 })->name('login');
+
+// Route::get('login', function () {
+//     return redirect('admin/login');
+// })->name('login');
 
 // Ruta para mostrar el formulario de registro
 Route::get('/register', [Controller::class, 'showRegister'])->name('register');

@@ -22,7 +22,7 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
         .header {
-            background: #0073e6;
+            background: #d33a0c;
             color: #ffffff;
             padding: 20px;
             text-align: center;
@@ -38,7 +38,7 @@
         }
         .button {
             display: inline-block;
-            background: #0073e6;
+            background: #096806;
             color: #ffffff;
             padding: 10px 20px;
             text-decoration: none;
@@ -63,11 +63,12 @@
             <p>Hola <strong>{{ $nombreUsuario }}</strong>,</p>
             <p>{{ $mensaje }}</p>
             <p>Para más detalles o para renovar tu suscripción, visita el siguiente enlace:</p>
-            <a href="https://streaming.fassid.com" class="button">Renovar Suscripción</a>
+            <a href="https://streaming.fassid.com/login" class="button">Renovar Suscripción</a>
         </div>
         <div class="footer">
             <p>TV Streaming Fassid, {{ date('Y') }}. Todos los derechos reservados.</p>
-            <p><a href="https://streaming.fassid.com/contacto">Contáctanos</a></p>
+            <p><a href="https://wa.me/59165203074?text=Quiero%20renovar%20mi%20suscripción">Contáctanos</a></p>
+
         </div>
     </div>
 </body>

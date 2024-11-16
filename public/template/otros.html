@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modelo Inspirado en Netflix</title>
+    <!-- Incluir el archivo head -->
+    <?php include 'head.html'; ?>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Modelo Inspirado en Netflix</title>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/all.min.css">
+        <link rel="stylesheet" href="css/estilos.css">
+        
+    </head>
+    
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Mi Plataforma</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="./">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="flujotv.html">Flujo Tv IPTV</a></li>
+                    <li class="nav-item"><a class="nav-link" href="mastv.html">Mas Tv IPTV</a></li>
+                    <li class="nav-item"><a class="nav-link" href="otros.html">Mi lista</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+   <!-- Hero Section -->
+<section class="hero-section">
+    <div class="hero-content">
+        <h1>Título Destacado</h1>
+        <p>Descripción breve de la película o serie destacada</p>
+        <button class="btn btn-danger"><i class="fas fa-play"></i> Ver ahora</button>
+        <button class="btn btn-secondary"><i class="fas fa-info-circle"></i> Más información</button>
+    </div>
+</section>
+
+    <!-- Filas de contenido con Slider -->
+    <section class="container my-5">
+        <h2 class="mb-4">Tendencias</h2>
+        <div id="carouselTendencias" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card">
+                                <img src="img/1.jpg" class="card-img-top" alt="Película 1">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                                <img src="img/2.jpg" class="card-img-top" alt="Película 2">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                                <img src="img/3.jpg" class="card-img-top" alt="Película 3">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                                <img src="img/4.jpg" class="card-img-top" alt="Película 4">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card">
+                                <img src="img/5.jpg" class="card-img-top" alt="Película 5">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                                <img src="img/6.jpg" class="card-img-top" alt="Película 6">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                                <img src="img/7.jpg" class="card-img-top" alt="Película 7">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                                <img src="img/8.jpg" class="card-img-top" alt="Película 8">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card">
+                                <img src="img/9.jpg" class="card-img-top" alt="Película 9">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                                <img src="img/10.jpg" class="card-img-top" alt="Película 10">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                                <img src="img/11.jpg" class="card-img-top" alt="Película 11">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                                <img src="img/12.jpg" class="card-img-top" alt="Película 12">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselTendencias"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselTendencias"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Siguiente</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- Planes Section -->
+    <section class="plans-section">
+        <div class="container text-center">
+            <h2 class="text-white mb-5">Elige tu Plan</h2>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="col">
+                    <div class="plan-card">
+                        <h3>Plan Básico</h3>
+                        <p>Acceso a contenidos en calidad estándar.</p>
+                        <h4>$5.99 / mes</h4>
+                        <a href="#" class="btn btn-danger">Seleccionar Plan</a>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="plan-card">
+                        <h3>Plan Estándar</h3>
+                        <p>Acceso a contenidos en calidad HD.</p>
+                        <h4>$8.99 / mes</h4>
+                        <a href="#" class="btn btn-danger">Seleccionar Plan</a>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="plan-card">
+                        <h3>Plan Premium</h3>
+                        <p>Acceso a contenidos en 4K y múltiples pantallas.</p>
+                        <h4>$13.99 / mes</h4>
+                        <a href="#" class="btn btn-danger">Seleccionar Plan</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Sección de FAQ -->
+<section class="container my-5">
+    <h2 class="mb-4 text-center">Preguntas Frecuentes (FAQ)</h2>
+    <div class="accordion" id="accordionFAQ">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    ¿Cómo puedo ver las películas o series?
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionFAQ">
+                <div class="accordion-body">
+                    Para ver nuestras películas o series, solo necesitas suscribirte a uno de nuestros planes y podrás acceder a todo nuestro catálogo desde cualquier dispositivo compatible.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    ¿Puedo cancelar mi suscripción en cualquier momento?
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionFAQ">
+                <div class="accordion-body">
+                    Sí, puedes cancelar tu suscripción en cualquier momento. No tendrás que pagar nuevamente después de cancelar, pero podrás seguir disfrutando del contenido hasta el final de tu período de suscripción.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    ¿Hay alguna prueba gratuita?
+                </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionFAQ">
+                <div class="accordion-body">
+                    Sí, ofrecemos una prueba gratuita de 7 días para que puedas explorar nuestro catálogo y decidir si te gusta. Durante este período, tendrás acceso completo a todas las películas y series.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFour">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                    ¿En qué dispositivos puedo ver el contenido?
+                </button>
+            </h2>
+            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionFAQ">
+                <div class="accordion-body">
+                    Puedes ver nuestras películas y series en una variedad de dispositivos, incluyendo smartphones, tabletas, computadoras y televisores inteligentes. Solo necesitas tener acceso a internet y una cuenta activa.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+ <!-- Incluir el archivo head -->
+<?php include 'footer.html'; ?>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2024 Mi Plataforma. Todos los derechos reservados.</p>
+    <a href="terminos-uso.html">Términos y condiciones de uso</a> | <a href="politicas-privacidad.html">Política de privacidad</a> | <a href="quienes-somos.html">Quienes Somos</a> | <a href="contacto.html">Contactanos</a> | <a href="terminos-reembolso.html">Política de garantias y reembolso</a> | <a
+        href="faq.html">Preguntas frecuentes</a>
+</footer>
+
+
+<!-- Scripts -->
+<script src="../js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

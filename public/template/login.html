@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planes con Animación</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f8f9fa;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            width: 230px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid #ddd;
+            opacity: 0;
+            transform: scale(0.5);
+            animation: slideIn 1s ease-out forwards;
+            animation-play-state: paused;
+        }
+
+        .highlight {
+            display: block;
+            font-size: 1.1em;
+            color: #28a745;
+        }
+
+        .destacado {
+            border-color: #ff5733;
+            box-shadow: 0 0 15px rgba(255, 87, 51, 0.5);
+            font-weight: bold;
+        }
+
+        .features {
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .secure {
+            font-size: 0.8em;
+            color: #6c757d;
+            margin-top: 10px;
+        }
+
+        .plan1 {
+            animation-delay: 0.2s;
+        }
+
+        .plan2 {
+            animation-delay: 0.4s;
+        }
+
+        .plan3 {
+            animation-delay: 0.6s;
+        }
+
+        .plan4 {
+            animation-delay: 0.8s;
+        }
+
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(50px) scale(0.5);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .capsula-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px;
+        }
+
+        .capsula {
+            display: flex;
+            align-items: center;
+            border: 2px solid #f39d1200;
+            /* Borde anaranjado */
+            border-radius: 25px;
+            overflow: hidden;
+            background-color: #f39d1200;
+            /* Fondo anaranjado */
+            position: relative;
+            /* Necesario para manejar `z-index` de los elementos */
+        }
+
+        .capsula:hover {
+            background-color: #f1c40f00;
+            /* Hover amarillo */
+            border-color: #f1c40f00;
+            /* Borde amarillo al hacer hover */
+        }
+
+        .capsula-item {
+            padding: 10px 20px;
+            background-color: #ffc400;
+            flex: 1;
+
+            text-align: center;
+            font-size: 16px;
+            margin: 0 5px;
+            /* Espacio de 5px entre los divs */
+            position: relative;
+
+            z-index: 1;
+            /* Mantiene los items debajo del separador */
+        }
+
+        .capsula-item:first-child {
+            border-top-left-radius: 25px;
+            /* Redondeo solo en la esquina superior izquierda */
+            border-bottom-left-radius: 25px;
+            /* Redondeo solo en la esquina inferior izquierda */
+        }
+
+        .capsula-item:last-child {
+            border-top-right-radius: 25px;
+            /* Redondeo solo en la esquina superior derecha */
+            border-bottom-right-radius: 25px;
+            /* Redondeo solo en la esquina inferior derecha */
+        }
+
+        .capsula-separator {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-weight: bold;
+            background-color: #e4e4e4;
+            /* Fondo anaranjado */
+            padding: 15px 15px;
+            border-radius: 50px;
+            /* Espaciado interno del separador */
+            z-index: 2;
+            /* Coloca el separador encima de los otros divs */
+            color: #000000;
+            /* Color del texto */
+        }
+
+        .capsula-item:hover {
+            background-color: #f1440f;
+            /* Hover amarillo en los items */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card plan1">
+            <h2>PLAN ANUAL</h2>
+            <p><span class="highlight">+2 Meses Gratis</span></p>
+            <h3>$86.99</h3>
+            <p class="features">+90 canales de deportes</p>
+            <p class="features">Ver en 3 pantallas</p>
+            <p class="features">Películas, Series, Animes</p>
+            <p class="features">Contenido Kids</p>
+            <p class="features">Contenido +18 Adultos</p>
+            <p class="features">Compatible con Android</p>
+            <button>COMPRAR</button>
+            <p class="secure">*Compra Segura</p>
+        </div>
+
+        <div class="card plan2">
+            <h2>PLAN SEMESTRAL</h2>
+            <p><span class="highlight">+1 Mes Gratis</span></p>
+            <h3>$55.99</h3>
+            <p class="features">+70 canales de deportes</p>
+            <p class="features">Ver en 2 pantallas</p>
+            <p class="features">Películas, Series</p>
+            <p class="features">Contenido Kids</p>
+            <button>COMPRAR</button>
+            <p class="secure">*Compra Segura</p>
+        </div>
+
+        <div class="card plan3 destacado">
+            <h2>PLAN PREMIUM</h2>
+            <p><span class="highlight">+3 Meses Gratis</span></p>
+            <h3>$120.99</h3>
+            <p class="features">+120 canales de deportes</p>
+            <p class="features">Ver en 5 pantallas</p>
+            <p class="features">Películas, Series, Animes</p>
+            <p class="features">Contenido Kids</p>
+            <p class="features">Contenido +18 Adultos</p>
+            <p class="features">Compatible con Android y iOS</p>
+            <button>COMPRAR</button>
+            <p class="secure">*Compra Segura</p>
+        </div>
+
+        <div class="card plan4">
+            <h2>PLAN MENSUAL</h2>
+            <p><span class="highlight">Sin Meses Gratis</span></p>
+            <h3>$19.99</h3>
+            <p class="features">+30 canales de deportes</p>
+            <p class="features">Ver en 1 pantalla</p>
+            <p class="features">Películas, Series</p>
+            <button>COMPRAR</button>
+            <p class="secure">*Compra Segura</p>
+        </div>
+    </div>
+
+    <div class="capsula-container">
+        <div class="capsula">
+            <div class="capsula-item">
+                <i class="fas fa-tv"></i> SMART TV
+            </div>
+            <div class="capsula-separator">O</div>
+            <div class="capsula-item">
+                <i class="fas fa-box"></i> TV BOX
+            </div>
+        </div>
+    </div>
+    <script src="scripts.js"></script>
+    <script>
+        document.querySelectorAll('.card').forEach(card => {
+            card.style.animationPlayState = 'running';
+        });
+
+    </script>
+</body>
+
+</html>

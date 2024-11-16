@@ -1,0 +1,450 @@
+body {
+    background: url('../img/bg2.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    /*overflow: hidden; /* Oculta la barra de desplazamiento en el body */
+    height: 100vh; /* Asegura que el body ocupa toda la pantalla */
+    margin: 0;
+}
+ /* Asegurar que las partículas cubran toda la página */
+ #particles-js {
+    position: fixed;
+    /* Fijo para que cubra toda la pantalla */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    /* Asegura que las partículas estén en el fondo */
+}
+
+.scrollable-content {
+    height: 100%; /* O ajusta al tamaño que necesites */
+    overflow-y: scroll; /* Permite el desplazamiento vertical */
+    padding-right: 15px; /* Opcional: evita que el contenido se mueva cuando la barra de desplazamiento está oculta */
+}
+
+/* Oculta la barra de desplazamiento en algunos navegadores */
+.scrollable-content::-webkit-scrollbar {
+    display: none;
+}
+
+.navbar {
+    background-color: #1e201e70;
+    z-index: 9999;
+}
+
+.navbar .navbar-brand {
+    font-size: 1.3rem;
+}
+
+
+/* Hero Section */
+.hero-section {
+    /* background-image: url('../img/bg2.jpg'); */
+    /* Cambia 'img/hero-background.jpg' por la ruta correcta de tu imagen */
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    /* Ajusta la altura de la sección según lo que desees */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    /* Establece el color del texto */
+}
+
+.hero-content {
+    text-align: center;
+    max-width: 600px;
+    /* Limita el tamaño del contenido */
+    background-color: rgba(0, 0, 0, 0);
+    /* Fondo semitransparente para el texto */
+    padding: 20px;
+    border-radius: 8px;
+    z-index: 100;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.hero-content .btn {
+    font-size: 1.1rem;
+    margin: 5px;
+}
+
+/* Asegúrate de que los iconos de Font Awesome estén cargados */
+.fas {
+    margin-right: 10px;
+}
+
+.card {
+    background-color: #33333300;
+    border: none;
+    border-radius: 25px;
+}
+
+.card img {
+    border-radius: 25px;
+}
+
+.footer {
+    background-color: #ffffff23;
+    padding: 20px 0;
+    text-align: center;
+    z-index: 99999;
+}
+
+.footer:hover{
+    z-index: 999;
+}
+
+.footer a {
+    color: #fff;
+    margin: 0 10px;
+    
+}
+
+.footer a:hover {
+    text-decoration: none;
+    color: inherit;
+    /* Mantiene el color al hacer hover */
+    
+}
+
+.plans-section {
+    /* background-color: #222; */
+    padding: 50px 0;
+    z-index: 5 !important;
+}
+
+ul.text-left {
+    list-style: none;
+    text-align: left;
+    padding: 0;
+    margin: 0;
+}
+
+
+
+ul.text-left li {
+    padding: 20px;
+    /* Espacio entre los elementos */
+    border-bottom: 1px solid #ccc;
+    /* Línea de separación */
+    font-size: 10pt;
+}
+
+ul.text-left li:last-child {
+    border-bottom: none;
+    /* Elimina la línea en el último elemento */
+}
+
+.card-plan {
+    /* Color rojo en la mitad izquierda */
+    border: 7px solid #f1440f;
+    /* Color de borde */
+    box-shadow: 16px 16px 16px #000008a6;
+    background-color: #1a1a1ab0;
+    border-radius: 25px;
+    padding: 30px;
+    text-align: center;
+    color: #fff;
+    transition: transform 0.3s ease;
+    z-index: 999 !important;
+}
+
+.card-plan:hover {
+    transform: scale(1.05);
+
+}
+
+.mitad-div {
+
+    background: linear-gradient(to top, #1a1a1a 85%, #f1440f 85%);
+    /* Color rojo en la mitad izquierda */
+    border: 7px solid #f1440f;
+    /* Color de borde */
+
+    /* background-color: #1a1a1a; */
+    border-radius: 30px;
+    padding: 30px;
+    text-align: center;
+    color: #fff;
+    transition: transform 0.3s ease;
+    z-index: 9999 !important;
+    box-shadow: 16px 16px 16px #000008;
+}
+
+.mitad-div:hover {
+    transform: scale(1.05);
+
+}
+
+.precio {
+    text-align: center;
+    margin-top: 40px;
+    color: #f1440f;
+}
+
+.cantidad {
+
+    font-size: 64pt;
+}
+
+.cantidad sup {
+    font-size: 30px;
+    vertical-align: super;
+}
+
+.cantidad sub {
+    font-size: 18px;
+    vertical-align: sub;
+}
+
+.anual {
+    font-size: 12pt;
+    margin-top: -15px;
+}
+
+.fas {
+    color: #f1440f;
+}
+
+.fab {
+    color: #f1440f;
+}
+
+.capsula-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+.capsula-section {
+    padding: 20px;
+
+    /* Color de fondo opcional */
+    text-align: center;
+    /* Centrar contenido */
+}
+
+.capsula-container {
+    display: inline-block;
+    /* Para centrar el contenido */
+    width: 100%;
+    /* Ajustar al tamaño del contenedor si es necesario */
+    max-width: 600px;
+    /* Tamaño máximo opcional */
+
+
+}
+
+.capsula {
+    height: 150px;
+    display: flex;
+    align-items: center;
+    /* Borde anaranjado */
+    border-radius: 25px;
+    overflow: hidden;
+    /* Fondo anaranjado */
+    position: relative;
+    /* Necesario para manejar `z-index` de los elementos */
+
+}
+
+
+
+.capsula-item {
+    padding: 10px 20px;
+    background-color: #f1440f;
+    flex: 1;
+    height: 75px;
+    text-align: center;
+    align-content: center !important;
+    font-size: 16px;
+    margin: 0 5px;
+    /* Espacio de 5px entre los divs */
+    color: #fff;
+    position: relative;
+
+    z-index: 1;
+    /* Mantiene los items debajo del separador */
+}
+
+.capsula-item a {
+    text-decoration: none;
+    color: inherit;
+    /* Mantiene el color al hacer hover */
+}
+
+
+
+.capsula-item:first-child {
+    border-top-left-radius: 50px;
+    /* Redondeo solo en la esquina superior izquierda */
+    border-bottom-left-radius: 50px;
+    /* Redondeo solo en la esquina inferior izquierda */
+}
+
+.capsula-item:last-child {
+    border-top-right-radius: 50px;
+    /* Redondeo solo en la esquina superior derecha */
+    border-bottom-right-radius: 50px;
+    /* Redondeo solo en la esquina inferior derecha */
+}
+
+.capsula-separator {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: bold;
+    background-color: #e4e4e4;
+    /* Fondo anaranjado */
+    padding: 15px 15px;
+    border-radius: 100px;
+    /* Espaciado interno del separador */
+    z-index: 2;
+    /* Coloca el separador encima de los otros divs */
+    color: #000000;
+    /* Color del texto */
+}
+
+.capsula-item:hover {
+    background-color: #ffc400;
+    /* Hover amarillo en los items */
+    transform: scale(1.06);
+}
+
+/* a {
+    text-decoration: none;
+    /* Quita el subrayado *
+    color: inherit;
+    /* Usa el color del texto padre *
+} */
+
+/* a:hover {
+    text-decoration: none;
+    /* Quita el subrayado al pasar el cursor *
+    color: inherit;
+    /* Mantiene el color al hacer hover *
+} */
+
+.plan-card h3 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.plan-card p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+
+}
+
+.plan-card .btn {
+    /* background-color: #e50914; */
+    color: #fff;
+    z-index: 999 !important;
+}
+
+.plan-card .btn:hover {
+    background-color: #f40612;
+    z-index: 999 !important;
+}
+
+/* Estilo para la sección de FAQ */
+.accordion-button {
+    background-color: #fffffff1;
+    /* Color de fondo del botón */
+    color: #252525fd;
+    /* Color del texto */
+    font-weight: bold;
+    /* Hacer el texto más destacado */
+    z-index: 999;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #f8d7da;
+    /* Color de fondo cuando está abierto */
+    color: #721c24;
+    /* Color de texto cuando está abierto */
+}
+
+.accordion-body {
+    background-color: #f1f1f1;
+    /* Color de fondo del contenido */
+    color: #333 !important;
+    /* Color del texto */
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.accordion-item {
+    margin-bottom: 10px;
+    /* Separación entre las preguntas */
+    color: #333;
+    border-radius: 8px;
+}
+
+/* Estilos comunes para las páginas */
+section {
+    background-color: #191a1b00;
+    /* Fondo claro para la página */
+    padding: 30px;
+    border-radius: 10px;
+    z-index: 999 !important;
+}
+
+h2 {
+    font-size: 2rem;
+    color: #b3b4b6;
+}
+
+h4 {
+    font-size: 1.5rem;
+    color: #b3b4b6;
+}
+
+p {
+    font-size: 1rem;
+    color: #b3b4b6;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+ul li {
+    font-size: 1rem;
+    color: #b3b4b6;
+}
+
+.error-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.error-code {
+    font-size: 8rem;
+    font-weight: bold;
+}
+
+.error-message {
+    font-size: 1.5rem;
+}

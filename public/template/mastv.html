@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modelo Inspirado en Netflix</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Incluir el archivo head -->
+    <?php include 'head.html'; ?>
+ 
+</head>
+
+<body>
+    <div id="particles-js"></div>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Mi Plataforma</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="flujotv.html">Flujo Tv IPTV</a></li>
+                    <li class="nav-item"><a class="nav-link" href="mastv.html">Mas Tv IPTV</a></li>
+                    <li class="nav-item"><a class="nav-link" href="register-login.html">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>MasTv IPTV</h1>
+            <h3>Comprar Mas TV IPTV Online</h3>
+            <p>Aquí tienes los mejores planes con precios económicos, ofertas, promociones, descuentos y más. Aquí
+                puedes tener canales en vivo, películas, serines y mucho deporte al Comprar MasTv IPTV Oficial.</p>
+            <button class="btn btn-danger"><i class="fas fa-play text-white"></i> Ver ahora</button>
+            <button class="btn btn-secondary"><i class="fas fa-info-circle text-white"></i> Más información</button>
+        </div>
+    </section>
+
+    <!-- Filas de contenido con Slider -->
+    <section class="container my-5">
+        <h2 class="mb-4 text-center">Planes Disponibles</h2>
+        <div id="carouselTendencias" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="row">
+                        <h2 class="mb-4 text-center">Un Dispositivo</h2>
+                        <div class="col">
+                            
+                            <div class="card">                                
+                                <div class="card-plan text-left">
+                                    <h3>1 Mes</h3>
+                                    <div class="anual">mensual</div>
+                                    <div class="precio">
+                                        <span class="cantidad"><sup>Bs</sup>35<sup>00</sup></span>
+                                        <div class="anual">1 MES</div>
+                                    </div>
+                                    <ul class="text-left">
+                                        <li><i class="fas fa-futbol"></i> +90 canales de deportes</li>
+                                        <li><i class="fas fa-tv"></i> Ver en 1 Pantalla</li>
+                                        <li><i class="fas fa-film"></i> Películas, Series, Animes</li>
+                                        <li><i class="fas fa-child"></i> Contenido Kids</li>
+                                        <li><i class="fas fa-user-secret"></i> Contenido +18 Adultos</li>
+                                        <li><i class="fab fa-android"></i> Compatible con Android</li>
+                                    </ul>
+                                    <a href="#" class="btn btn-danger">Seleccionar Plan</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-plan text-left">
+                                    <h3>3 Meses</h3>
+                                    <div class="anual">trimestral</div>
+                                    <div class="precio">
+                                        <span class="cantidad"><sup>Bs</sup>89<sup>99</sup></span>
+                                        <div class="anual">3 MESES</div>
+                                    </div>
+                                    <ul class="text-left">
+                                        <li><i class="fas fa-futbol"></i> +90 canales de deportes</li>
+                                        <li><i class="fas fa-tv"></i> Ver en 1 Pantalla</li>
+                                        <li><i class="fas fa-film"></i> Películas, Series, Animes</li>
+                                        <li><i class="fas fa-child"></i> Contenido Kids</li>
+                                        <li><i class="fas fa-user-secret"></i> Contenido +18 Adultos</li>
+                                        <li><i class="fab fa-android"></i> Compatible con Android</li>
+                                    </ul>
+                                    <a href="#" class="btn btn-danger">Seleccionar Plan</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-plan text-left">
+                                    <h3>6 Meses</h3>
+                                    <div class="anual">(+1 mes Gratis)</div>
+                                    <div class="precio">
+                                        <span class="cantidad"><sup>Bs</sup>159<sup>99</sup></span>
+                                        <div class="anual">7 MESES</div>
+                                    </div>
+                                    <ul class="text-left">
+                                        <li><i class="fas fa-futbol"></i> +90 canales de deportes</li>
+                                        <li><i class="fas fa-tv"></i> Ver en 1 Pantalla</li>
+                                        <li><i class="fas fa-film"></i> Películas, Series, Animes</li>
+                                        <li><i class="fas fa-child"></i> Contenido Kids</li>
+                                        <li><i class="fas fa-user-secret"></i> Contenido +18 Adultos</li>
+                                        <li><i class="fab fa-android"></i> Compatible con Android</li>
+                                    </ul>
+                                    <a href="#" class="btn btn-danger">Seleccionar Plan</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-plan text-left">
+                                    <h3>Plan Anual</h3>
+                                    <div class="anual">(+2 meses Gratis)</div>
+                                    <div class="precio">
+                                        <span class="cantidad"><sup>Bs</sup>319<sup>99</sup></span>
+                                        <div class="anual">ANUAL</div>
+                                    </div>
+                                    <ul class="text-left">
+                                        <li><i class="fas fa-futbol"></i> +90 canales de deportes</li>
+                                        <li><i class="fas fa-tv"></i> Ver en 1 Pantalla</li>
+                                        <li><i class="fas fa-film"></i> Películas, Series, Animes</li>
+                                        <li><i class="fas fa-child"></i> Contenido Kids</li>
+                                        <li><i class="fas fa-user-secret"></i> Contenido +18 Adultos</li>
+                                        <li><i class="fab fa-android"></i> Compatible con Android</li>
+                                    </ul>
+                                    <a href="#" class="btn btn-danger">Seleccionar Plan</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="row">
+                        <h2 class="mb-4 text-center">Dos Dispositivo</h2>
+                        <div class="col">
+                            
+                            <div class="card">                                
+                                <div class="card-plan text-left">
+                                    <h3>1 Mes</h3>
+                                    <div class="anual">mensual</div>
+                                    <div class="precio">
+                                        <span class="cantidad"><sup>Bs</sup>39<sup>99</sup></span>
+                                        <div class="anual">1 MES</div>
+                                    </div>
+                                    <ul class="text-left">
+                                        <li><i class="fas fa-futbol"></i> +90 canales de deportes</li>
+                                        <li><i class="fas fa-tv"></i> Ver en 2 Pantallas</li>
+                                        <li><i class="fas fa-film"></i> Películas, Series, Animes</li>
+                                        <li><i class="fas fa-child"></i> Contenido Kids</li>
+                                        <li><i class="fas fa-user-secret"></i> Contenido +18 Adultos</li>
+                                        <li><i class="fab fa-android"></i> Compatible con Android</li>
+                                    </ul>
+                                    <a href="#" class="btn btn-danger">Seleccionar Plan</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-plan text-left">
+                                    <h3>3 Meses</h3>
+                                    <div class="anual">trimestral</div>
+                                    <div class="precio">
+                                        <span class="cantidad"><sup>Bs</sup>114<sup>00</sup></span>
+                                        <div class="anual">3 MESES</div>
+                                    </div>
+                                    <ul class="text-left">
+                                        <li><i class="fas fa-futbol"></i> +90 canales de deportes</li>
+                                        <li><i class="fas fa-tv"></i> Ver en 2 Pantallas</li>
+                                        <li><i class="fas fa-film"></i> Películas, Series, Animes</li>
+                                        <li><i class="fas fa-child"></i> Contenido Kids</li>
+                                        <li><i class="fas fa-user-secret"></i> Contenido +18 Adultos</li>
+                                        <li><i class="fab fa-android"></i> Compatible con Android</li>
+                                    </ul>
+                                    <a href="#" class="btn btn-danger">Seleccionar Plan</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-plan text-left">
+                                    <h3>6 Meses</h3>
+                                    <div class="anual">(+1 mes Gratis)</div>
+                                    <div class="precio">
+                                        <span class="cantidad"><sup>Bs</sup>204<sup>99</sup></span>
+                                        <div class="anual">7 MESES</div>
+                                    </div>
+                                    <ul class="text-left">
+                                        <li><i class="fas fa-futbol"></i> +90 canales de deportes</li>
+                                        <li><i class="fas fa-tv"></i> Ver en 2 Pantallas</li>
+                                        <li><i class="fas fa-film"></i> Películas, Series, Animes</li>
+                                        <li><i class="fas fa-child"></i> Contenido Kids</li>
+                                        <li><i class="fas fa-user-secret"></i> Contenido +18 Adultos</li>
+                                        <li><i class="fab fa-android"></i> Compatible con Android</li>
+                                    </ul>
+                                    <a href="#" class="btn btn-danger">Seleccionar Plan</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-plan text-left">
+                                    <h3>Plan Anual</h3>
+                                    <div class="anual">(+2 meses Gratis)</div>
+                                    <div class="precio">
+                                        <span class="cantidad"><sup>Bs</sup>394<sup>99</sup></span>
+                                        <div class="anual">ANUAL</div>
+                                    </div>
+                                    <ul class="text-left">
+                                        <li><i class="fas fa-futbol"></i> +90 canales de deportes</li>
+                                        <li><i class="fas fa-tv"></i> Ver en 2 Pantallas</li>
+                                        <li><i class="fas fa-film"></i> Películas, Series, Animes</li>
+                                        <li><i class="fas fa-child"></i> Contenido Kids</li>
+                                        <li><i class="fas fa-user-secret"></i> Contenido +18 Adultos</li>
+                                        <li><i class="fab fa-android"></i> Compatible con Android</li>
+                                    </ul>
+                                    <a href="#" class="btn btn-danger">Seleccionar Plan</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="row">
+                        <h2 class="mb-4 text-center">Tres Dispositivo</h2>
+                        <div class="col">                            
+                            <div class="card">                                
+                                <div class="card-plan text-left">
+                                    <h3>1 Mes</h3>
+                                    <div class="anual">mensual</div>
+                                    <div class="precio">
+                                        <span class="cantidad"><sup>Bs</sup>54<sup>99</sup></span>
+                                        <div class="anual">1 MES</div>
+                                    </div>
+                                    <ul class="text-left">
+                                        <li><i class="fas fa-futbol"></i> +90 canales de deportes</li>
+                                        <li><i class="fas fa-tv"></i> Ver en 3 Pantallas</li>
+                                        <li><i class="fas fa-film"></i> Películas, Series, Animes</li>
+                                        <li><i class="fas fa-child"></i> Contenido Kids</li>
+                                        <li><i class="fas fa-user-secret"></i> Contenido +18 Adultos</li>
+                                        <li><i class="fab fa-android"></i> Compatible con Android</li>
+                                    </ul>
+                                    <a href="#" class="btn btn-danger">Seleccionar Plan</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-plan text-left">
+                                    <h3>3 Meses</h3>
+                                    <div class="anual">trimestral</div>
+                                    <div class="precio">
+                                        <span class="cantidad"><sup>Bs</sup>129<sup>99</sup></span>
+                                        <div class="anual">3 MESES</div>
+                                    </div>
+                                    <ul class="text-left">
+                                        <li><i class="fas fa-futbol"></i> +90 canales de deportes</li>
+                                        <li><i class="fas fa-tv"></i> Ver en 3 Pantallas</li>
+                                        <li><i class="fas fa-film"></i> Películas, Series, Animes</li>
+                                        <li><i class="fas fa-child"></i> Contenido Kids</li>
+                                        <li><i class="fas fa-user-secret"></i> Contenido +18 Adultos</li>
+                                        <li><i class="fab fa-android"></i> Compatible con Android</li>
+                                    </ul>
+                                    <a href="#" class="btn btn-danger">Seleccionar Plan</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-plan text-left">
+                                    <h3>6 Meses</h3>
+                                    <div class="anual">(+1 mes Gratis)</div>
+                                    <div class="precio">
+                                        <span class="cantidad"><sup>Bs</sup>239<sup>99</sup></span>
+                                        <div class="anual">7 MESES</div>
+                                    </div>
+                                    <ul class="text-left">
+                                        <li><i class="fas fa-futbol"></i> +90 canales de deportes</li>
+                                        <li><i class="fas fa-tv"></i> Ver en 3 Pantallas</li>
+                                        <li><i class="fas fa-film"></i> Películas, Series, Animes</li>
+                                        <li><i class="fas fa-child"></i> Contenido Kids</li>
+                                        <li><i class="fas fa-user-secret"></i> Contenido +18 Adultos</li>
+                                        <li><i class="fab fa-android"></i> Compatible con Android</li>
+                                    </ul>
+                                    <a href="#" class="btn btn-danger">Seleccionar Plan</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-plan text-left">
+                                    <h3>Plan Anual</h3>
+                                    <div class="anual">(+2 meses Gratis)</div>
+                                    <div class="precio">
+                                        <span class="cantidad"><sup>Bs</sup>454<sup>99</sup></span>
+                                        <div class="anual">ANUAL</div>
+                                    </div>
+                                    <ul class="text-left">
+                                        <li><i class="fas fa-futbol"></i> +90 canales de deportes</li>
+                                        <li><i class="fas fa-tv"></i> Ver en 3 Pantallas</li>
+                                        <li><i class="fas fa-film"></i> Películas, Series, Animes</li>
+                                        <li><i class="fas fa-child"></i> Contenido Kids</li>
+                                        <li><i class="fas fa-user-secret"></i> Contenido +18 Adultos</li>
+                                        <li><i class="fab fa-android"></i> Compatible con Android</li>
+                                    </ul>
+                                    <a href="#" class="btn btn-danger">Seleccionar Plan</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselTendencias"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselTendencias"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Siguiente</span>
+            </button>
+        </div>
+    </section>
+
+   <!-- Filas de contenido con Slider -->
+   <section class="capsula-section">
+    <div class="container">
+        <h1 class="text-white mb-5">Descargar Mas Tv IPTV</h1>
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            <div class="col">
+                <div class="capsula-container">
+                    <div class="capsula">
+                        <div class="capsula-item">
+                            <a href="#">
+                                <h3><i class="fas fa-tv text-white"></i> SMART TV</h3>
+                            </a>
+                            <!-- <h3><i class="fas fa-tv text-white"></i> SMART TV</h3> -->
+                        </div>
+                        <div class="capsula-separator">O</div>
+                        <div class="capsula-item">
+                            <a href="#"><h3><i class="fas fa-box text-white"></i> TV BOX</h3></a>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="capsula-container">
+                    <div class="capsula">
+                        <div class="capsula-item">
+                            <a href="#"><h3><i class="fa-brands fa-amazon"></i> FIRE STICK </h3></a>                                
+                        </div>
+                        <div class="capsula-separator">O</div>
+                        <div class="capsula-item">
+                            <a href="#"><h3><i class="fa-solid fa-laptop"></i> PC </h3></a>                                
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</section>
+    <!-- Sección de FAQ -->
+    <section class="container my-5">
+        <h2 class="mb-4 text-center">Preguntas Frecuentes (FAQ)</h2>
+        <div class="accordion" id="accordionFAQ">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        ¿Cómo puedo ver las películas o series?
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                    data-bs-parent="#accordionFAQ">
+                    <div class="accordion-body">
+                        Para ver nuestras películas o series, solo necesitas suscribirte a uno de nuestros planes y
+                        podrás acceder a todo nuestro catálogo desde cualquier dispositivo compatible.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        ¿Puedo cancelar mi suscripción en cualquier momento?
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                    data-bs-parent="#accordionFAQ">
+                    <div class="accordion-body">
+                        Sí, puedes cancelar tu suscripción en cualquier momento. No tendrás que pagar nuevamente después
+                        de cancelar, pero podrás seguir disfrutando del contenido hasta el final de tu período de
+                        suscripción.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        ¿Hay alguna prueba gratuita?
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                    data-bs-parent="#accordionFAQ">
+                    <div class="accordion-body">
+                        Sí, ofrecemos una prueba gratuita de 7 días para que puedas explorar nuestro catálogo y decidir
+                        si te gusta. Durante este período, tendrás acceso completo a todas las películas y series.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingFour">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        ¿En qué dispositivos puedo ver el contenido?
+                    </button>
+                </h2>
+                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+                    data-bs-parent="#accordionFAQ">
+                    <div class="accordion-body">
+                        Puedes ver nuestras películas y series en una variedad de dispositivos, incluyendo smartphones,
+                        tabletas, computadoras y televisores inteligentes. Solo necesitas tener acceso a internet y una
+                        cuenta activa.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Incluir el archivo head -->
+    <?php include 'footer.html'; ?>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Tv Streaming Fassid. Todos los derechos reservados.</p>
+        <a href="terminos-uso.html">Términos y condiciones de uso</a> | <a href="politicas-privacidad.html">Política de
+            privacidad</a> | <a href="quienes-somos.html">Quienes Somos</a> | <a href="contacto.html">Contactanos</a> |
+        <a href="terminos-reembolso.html">Política de garantias y reembolso</a> | <a href="faq.html">Preguntas
+            frecuentes</a>
+    </footer>
+
+
+    <!-- Scripts -->
+       <!-- Incluir el archivo JS de bootstrap -->
+       <script src="js/bootstrap.bundle.min.js"></script>
+
+       <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+       <script src="js/particulas.js"></script>
+</body>
+
+</html>
