@@ -15,14 +15,14 @@
         }
         .container {
             max-width: 600px;
-            margin: 20px auto;
+            margin: 100px auto;
             background: #ffffff;
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
         .header {
-            background: #d33a0c;
+            background: #fa450e;
             color: #ffffff;
             padding: 20px;
             text-align: center;
