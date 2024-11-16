@@ -39,16 +39,16 @@ class SendSubscriptionReminder extends Command
                 continue;
             }
 
-            $numeroTelefono = $suscripcion->user && $suscripcion->user->profile ? $suscripcion->user->profile->phone_number : null;
+            // $numeroTelefono = $suscripcion->user && $suscripcion->user->profile ? $suscripcion->user->profile->phone_number : null;
             $emailUsuario = $suscripcion->user ? $suscripcion->user->email : null;
 
-            if ($numeroTelefono) {
-                $numeroTelefonoConPrefijo = '+591' . $numeroTelefono;
-                $this->sendSms($numeroTelefonoConPrefijo, $mensaje);
-                $this->info("Mensaje enviado al número: {$numeroTelefonoConPrefijo}");
-            } else {
-                $this->info("No se encontró el número de teléfono para el usuario ID: {$suscripcion->user_id}");
-            }
+            // if ($numeroTelefono) {
+            //     $numeroTelefonoConPrefijo = '+591' . $numeroTelefono;
+            //     $this->sendSms($numeroTelefonoConPrefijo, $mensaje);
+            //     $this->info("Mensaje enviado al número: {$numeroTelefonoConPrefijo}");
+            // } else {
+            //     $this->info("No se encontró el número de teléfono para el usuario ID: {$suscripcion->user_id}");
+            // }
 
             if ($emailUsuario) {
                 $this->sendEmail($emailUsuario, $nombreUsuario, $mensaje);
@@ -86,7 +86,7 @@ class SendSubscriptionReminder extends Command
     private function sendEmail($email, $nombreUsuario, $mensaje)
     {
         $this->info("Enviando correo electrónico a: {$email}"); // Depuración
-    
+
         try {
             Mail::send('emails.subscription-reminder', ['nombreUsuario' => $nombreUsuario, 'mensaje' => $mensaje], function ($message) use ($email) {
                 $message->to($email)->subject('Recordatorio de Suscripción - TV Streaming Fassid');
