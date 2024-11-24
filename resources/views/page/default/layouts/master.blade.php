@@ -21,18 +21,20 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{{route('index')}}">{{ setting('admin.title') }}</a>
+            <a class="navbar-brand" href="{{ route('index') }}">{{ setting('admin.title') }}</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link  text-danger" href="{{ route('index')}}">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link  text-danger" href="{{ route('flujotv')}}">Flujo Tv IPTV</a></li>
-                    <li class="nav-item"><a class="nav-link  text-danger" href="{{ route('mastv')}}">MasTv IPTV</a></li>
+                    <li class="nav-item"><a class="nav-link  text-danger" href="{{ route('index') }}">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link  text-danger" href="{{ route('flujotv') }}">Flujo Tv
+                            IPTV</a></li>
+                    <li class="nav-item"><a class="nav-link  text-danger" href="{{ route('mastv') }}">MasTv IPTV</a>
+                    </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login')}}">
+                        <a class="nav-link" href="{{ route('login') }}">
                             <i class="fa-solid fa-power-off text-danger"></i>
                         </a>
                     </li>
@@ -41,37 +43,42 @@
         </div>
     </nav>
 
-   <!-- Hero Section -->
-<section class="hero-section">
-    <div class="hero-content">
-        @if ($page == 'index')
-            <h1>Bienvenidos</h1>
-            <h3>TV Streaming Fassid</h3>
-            <p>Simplifica tu compra y paga de forma moderna con nuestro método de pago QR, seguro y sin complicaciones.</p>
-        @elseif ($page == 'flujotv')
-            <h1>Flujotv</h1>
-            <h3>Comprar Flujo TV Online</h3>
-            <p>Aquí tienes los mejores planes con precios económicos, ofertas, promociones, descuentos y más. Aquí
-                puedes tener canales en vivo, películas, serines y mucho deporte al Comprar FlujoTV Oficial.</p>
-        @elseif ($page == 'mastv')
-            <h1>MasTV IPTV</h1>
-            <h3>Comprar Mas TV IPTV Online</h3>
-            <p>Aquí tienes los mejores planes con precios económicos, ofertas, promociones, descuentos y más. Aquí
-                puedes tener canales en vivo, películas, serines y mucho deporte al Comprar MasTv IPTV Oficial.</p>
-        @else
-            <h1>Título por defecto</h1>
-            <h3>Comprar Flujo TV Online</h3>
-            <p>Aquí tienes los mejores planes con precios económicos, ofertas, promociones, descuentos y más. Aquí
-                puedes tener canales en vivo, películas, serines y mucho deporte al Comprar FlujoTV Oficial.</p>
-        @endif
-        <button class="btn btn-danger"><i class="fas fa-play text-white"></i> Ver ahora</button>
-        <button class="btn btn-secondary"><i class="fas fa-info-circle text-white"></i> Más información</button>
-    </div>
-</section>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            @if ($page == 'index')
+                <h1>Bienvenidos</h1>
+                <h3>TV Streaming Fassid</h3>
+                <p>Simplifica tu compra y paga de forma moderna con nuestro método de pago QR, seguro y sin
+                    complicaciones.</p>
+            @elseif ($page == 'flujotv')
+                <h1>Flujotv</h1>
+                <h3>Comprar Flujo TV Online</h3>
+                <p>Aquí tienes los mejores planes con precios económicos, ofertas, promociones, descuentos y más. Aquí
+                    puedes tener canales en vivo, películas, serines y mucho deporte al Comprar FlujoTV Oficial.</p>
+            @elseif ($page == 'mastv')
+                <h1>MasTV IPTV</h1>
+                <h3>Comprar Mas TV IPTV Online</h3>
+                <p>Aquí tienes los mejores planes con precios económicos, ofertas, promociones, descuentos y más. Aquí
+                    puedes tener canales en vivo, películas, serines y mucho deporte al Comprar MasTv IPTV Oficial.</p>
+            @elseif ($page == 'terminos-uso')
+                <h1>TERMINOS Y CONDICIONES DE USO</h1>
+                <h3>Leer detallamente</h3>
+                <p>Aquí explicamos detalladamente los terminos y condiciones de uso, de los servicios que ofrecemos, por favor le rogamos tomar en cuanta y leerlos detalladamente, gacias.</p>
+            @else
+                <h1>Título por defecto</h1>
+                <h3>Comprar Flujo TV Online</h3>
+                <p>Aquí tienes los mejores planes con precios económicos, ofertas, promociones, descuentos y más. Aquí
+                    puedes tener canales en vivo, películas, serines y mucho deporte al Comprar FlujoTV Oficial.</p>
+            @endif
+            <button class="btn btn-danger"><i class="fas fa-play text-white"></i> Ver ahora</button>
+            <button class="btn btn-secondary"><i class="fas fa-info-circle text-white"></i> Más información</button>
+        </div>
+    </section>
 
     @yield('content')
 
-    <section class="container my-5" style="z-index:999;">
+    {{-- <section class="container my-5" style="z-index:999;">
         <h2 class="mb-4 text-center">Preguntas Frecuentes (FAQ)</h2>
         <div class="accordion" id="accordionFAQ">
             <div class="accordion-item">
@@ -137,12 +144,12 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- Incluir el archivo head -->
-    {{-- <?php include 'footer.html'; ?>  --}}
+
 
     <!-- Footer -->
-    <footer class="footer text-center">
+    <footer class="footer text-center" style="z-index: 900 !important;">
         <p>&copy; 2024 Tv Streaming Fassid. Todos los derechos reservados.</p>
         <a href="terminos-uso.html">Términos y condiciones de uso</a> | <a href="politicas-privacidad.html">Política
             de

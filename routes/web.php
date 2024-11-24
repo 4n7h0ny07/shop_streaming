@@ -34,6 +34,12 @@ Route::get('/login', function () {
     return view('page.default.login');
 })->name('login');
 
+Route::get('/uso', function () {
+    return view('page.default.terminos-uso', ['page' => 'terminos-uso']);
+})->name('terminos-uso');
+
+
+
 // Route::get('login', function () {
 //     return redirect('admin/login');
 // })->name('login');

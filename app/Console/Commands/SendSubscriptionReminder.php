@@ -30,11 +30,11 @@ class SendSubscriptionReminder extends Command
 
             if ($diasRestantes > 0 && $diasRestantes <= 7) {
                 $nombreUsuario = $suscripcion->user ? $suscripcion->user->name : 'Estimado cliente';
-                $mensaje = "De TV Streaming Fassid: hola {$nombreUsuario}, tu suscripción vence en {$diasRestantes} días, visita https://streaming.fassid.com para realizar la renovación.";
+                $mensaje = "De TV Streaming Fassid: hola {$nombreUsuario}, tu suscripción vence en {$diasRestantes} días.";
             } elseif ($diasRestantes < 0 && $diasRestantes >= -7) {
                 $nombreUsuario = $suscripcion->user ? $suscripcion->user->name : 'Estimado cliente';
                 $diasVencidos = abs($diasRestantes);
-                $mensaje = "TV Streaming Fassid: hola {$nombreUsuario}, tu suscripción venció hace {$diasVencidos} días. Visita https://streaming.fassid.com para renovarla.";
+                $mensaje = "TV Streaming Fassid: hola {$nombreUsuario}, tu suscripción venció hace {$diasVencidos} días.";
             } else {
                 continue;
             }
