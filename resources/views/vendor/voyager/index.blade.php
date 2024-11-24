@@ -31,7 +31,7 @@
 
                         $totalVencidas = \App\Models\Suscripcion::where(
                             'fecha_fin',
-                            '<',
+                            '<=',
                             \Carbon\Carbon::now(),
                         )->count();
 
@@ -44,7 +44,7 @@
                         // Obtener todos los productos con suscripciones vencidas
                         $productos = \App\Models\Product::with([
                             'cuentas.perfiles.suscripciones' => function ($query) {
-                                $query->where('fecha_fin', '<', \Carbon\Carbon::now()); // Filtra suscripciones vencidas
+                                $query->where('fecha_fin', '<=', \Carbon\Carbon::now()); // Filtra suscripciones vencidas
                             },
                             'cuentas.perfiles.suscripciones.user', // Cargar la relación del usuario
                         ])->get();
@@ -52,7 +52,7 @@
                         // Obtener todos los productos con suscripciones vencidas
                         $productov = \App\Models\Product::with([
                             'cuentas.perfiles.suscripciones' => function ($query) {
-                                $query->where('fecha_fin', '>', \Carbon\Carbon::now()); // Filtra suscripciones vencidas
+                                $query->where('fecha_fin', '=>', \Carbon\Carbon::now()); // Filtra suscripciones vencidas
                             },
                             'cuentas.perfiles.suscripciones.user', // Cargar la relación del usuario
                         ])->get();
@@ -239,17 +239,17 @@
                             $totalDebit = \App\Models\Transaction::where('user_id', auth()->id())
                                 ->where('type', 'debit')
                                 ->sum('amount');
-                            $caducadas = \App\Models\Suscripcion::where('fecha_fin', '<', \Carbon\Carbon::now())
+                            $caducadas = \App\Models\Suscripcion::where('fecha_fin', '<=', \Carbon\Carbon::now())
                                 ->where('user_id', auth()->id())
                                 ->get();
 
-                            $vigentes = \App\Models\Suscripcion::where('fecha_fin', '>', \Carbon\Carbon::now())
+                            $vigentes = \App\Models\Suscripcion::where('fecha_fin', '>=', \Carbon\Carbon::now())
                                 ->where('user_id', auth()->id())
                                 ->get();
 
                             // Suscripciones vencidas del usuario actual
                             $totalVencidas = \App\Models\Suscripcion::where('user_id', auth()->id())
-                                ->where('fecha_fin', '<', \Carbon\Carbon::now())
+                                ->where('fecha_fin', '<=', \Carbon\Carbon::now())
                                 ->count();
 
                             // Suscripciones vigentes del usuario actual
