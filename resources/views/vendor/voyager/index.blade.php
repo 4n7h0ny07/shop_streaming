@@ -52,7 +52,7 @@
                         // Obtener todos los productos con suscripciones vencidas
                         $productov = \App\Models\Product::with([
                             'cuentas.perfiles.suscripciones' => function ($query) {
-                                $query->where('fecha_fin', '=>', \Carbon\Carbon::now()); // Filtra suscripciones vencidas
+                                $query->where('fecha_fin', '>=', \Carbon\Carbon::now()); // Filtra suscripciones vencidas
                             },
                             'cuentas.perfiles.suscripciones.user', // Cargar la relación del usuario
                         ])->get();
