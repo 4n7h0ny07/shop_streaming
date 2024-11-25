@@ -404,7 +404,7 @@
                                                                                                 {{ \Carbon\Carbon::now()->diffInDays($suscripcion->fecha_fin) }}
                                                                                                 dias</span>
                                                                                         </td>
-                                                                                        <td>{{ $producto->nombre }} <br> {{$perfiles->nombre_perfil}}</td>
+                                                                                        <td>{{ $producto->nombre }} <br> {{$suscripcion->nombre_perfil}}</td>
                                                                                         <td> {{ $cuenta->usuario }} </td>
                                                                                         <td></td>
                                                                                     </tr>
