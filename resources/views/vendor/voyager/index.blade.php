@@ -185,7 +185,7 @@
                                                                                         {{ \Carbon\Carbon::now()->diffInDays($suscripcion->fecha_fin) }}
                                                                                         dias</span></td>
                                                                                 <td>{{ $suscripcion->user->name }} <br> {{ $cuenta->usuario }} </td>
-                                                                                <td>{{ $product->nombre }} <br> {{ $perfil->nombre_perfil }}</td>
+                                                                                <td>{{ $product->nombre }} <br> {{ $suscripciones->nombre_perfil }}</td>
                                                                             </tr>
                                                                         @endforeach
                                                                     @endforeach
@@ -404,8 +404,8 @@
                                                                                                 {{ \Carbon\Carbon::now()->diffInDays($suscripcion->fecha_fin) }}
                                                                                                 dias</span>
                                                                                         </td>
-                                                                                        <td>{{ $producto->nombre }} <br> {{$suscripcion->perfiles->nombre_perfil}}</td>
-                                                                                        <td> {{ $cuenta->usuario }} hola</td>
+                                                                                        <td>{{ $producto->nombre }} <br> {{$perfiles->nombre_perfil}}</td>
+                                                                                        <td> {{ $cuenta->usuario }} </td>
                                                                                         <td></td>
                                                                                     </tr>
                                                                                 @endforeach
