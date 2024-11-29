@@ -10,7 +10,11 @@
             style="color:rgb(3, 17, 139); font-size: 24pt; text-align:right !important">{{ number_format($balance, 2) }}</b>
         Bs.
     </div>
-
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
 @stop
 
 <div class="page-content browse container-fluid">
@@ -61,29 +65,58 @@
                                                     <td>{{ $producto->precio_suscripcion }}</td>
                                                     <!-- Email o algún identificador de la cuenta -->
                                                     {{-- <td>{{ $perfil->nombre_perfil }}</td> <!-- Nombre del perfil --> --}}
-                                                    <td> {{ \Carbon\Carbon::parse($suscripcion->fecha_fin)->locale('es')->translatedFormat('j \\de F \\de Y') }} <br>
-                                                         @if ($suscripcion->fecha_fin <  \Carbon\Carbon::now() )
-                                                            <label class="label label-danger" style="border-radius: 15px;"> Vencío hace {{\Carbon\Carbon::now()->diffInDays($suscripcion->fecha_fin) }} dias </label>
-                                                         @else
-                                                         <label class="label label-success" style="border-radius: 15px;">  Vence en {{\Carbon\Carbon::now()->diffInDays($suscripcion->fecha_fin) }} dias </label>
-                                                         @endif
+                                                    <td> {{ \Carbon\Carbon::parse($suscripcion->fecha_fin)->locale('es')->translatedFormat('j \\de F \\de Y') }}
+                                                        <br>
+
+                                                        @if ($suscripcion->fecha_fin < \Carbon\Carbon::now())
+                                                            <label class="label label-danger"
+                                                                style="border-radius: 15px;"> Vencío hace
+                                                                {{ \Carbon\Carbon::now()->diffInDays($suscripcion->fecha_fin) }}
+                                                                dias </label>
+                                                        @else
+                                                            <label class="label label-success"
+                                                                style="border-radius: 15px;"> Vence en
+                                                                {{ \Carbon\Carbon::now()->diffInDays($suscripcion->fecha_fin) }}
+                                                                dias </label>
+                                                        @endif
+                                                        <br>
+                                                        <code>{{ $suscripcion->estado }}</code>
                                                     </td>
                                                     <!-- Fecha de inicio de la suscripción -->
                                                     <td>
                                                         <div class="btn-group" role="group"
                                                             aria-label="Basic example">
-                                                            <button type="button" class="btn btn-primary view-account"
-                                                                data-id="{{ $cuenta->id }}" data-bs-toggle="tooltip"
-                                                                data-bs-placement="top"
-                                                                title="Clic para ver datos de acceso del perfil"> <i
-                                                                    class="voyager-eye"></i>
-                                                            </button> <button Class="btn btn-warning view-renovar"
-                                                                data-producto="{{ $producto->nombre }}"
-                                                                data-id="{{ $suscripcion->id }}"
-                                                                data-precio="{{ $producto->precio_suscripcion }}"
-                                                                data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                title="Clic para ver opciones de renovacion del perfil">
-                                                                <i class="voyager-forward"></i> </button>
+                                                            @if ($suscripcion->estado === 'activo')
+                                                                <button type="button"
+                                                                    class="btn btn-primary view-account"
+                                                                    data-id="{{ $cuenta->id }}"
+                                                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                    title="Clic para ver datos de acceso del perfil"> <i
+                                                                        class="voyager-eye"></i>
+                                                                </button>
+
+                                                                <button Class="btn btn-warning view-renovar"
+                                                                    data-producto="{{ $producto->nombre }}"
+                                                                    data-id="{{ $suscripcion->id }}"
+                                                                    data-precio="{{ $producto->precio_suscripcion }}"
+                                                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                    title="Clic para ver opciones de renovacion del perfil">
+                                                                    <i class="voyager-credit-card"></i> 
+                                                                </button>
+                                                                <form method="POST"
+                                                                    action="{{ route('suscripcion.baja', $suscripcion->id) }}"
+                                                                    style="display: inline;">
+                                                                    @csrf
+                                                                    @method('PUT')
+                                                                    <button type="submit" class="btn btn-danger"
+                                                                        data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                        title="Dar de baja la suscripción">
+                                                                        <i class="voyager-trash"></i>
+                                                                    </button>
+                                                                </form>
+                                                            @else
+                                                            Dado de Baja en fecha: <br> {{ \Carbon\Carbon::parse($suscripcion->updated_at)->locale('es')->translatedFormat('j \\de F \\de Y') }}
+                                                            @endif
                                                         </div>
                                                     </td>
                                                     <!-- acciones -->

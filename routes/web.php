@@ -68,6 +68,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/wallet/{id}', [WalletController::class, 'obtenerCuenta'])->name('wallet.obtener');
 
     Route::post('/wallet/{id}renovar', [WalletController::class, 'renovarPerfil'])->name('wallet.renovar');
+    Route::put('/suscripciones/{id}/baja', [SuscripcionController::class, 'darDeBaja'])->name('suscripcion.baja');
+
 
     Route::get('/shopping', [SuscripcionController::class, 'index'])->name('shopping.index');
     Route::get('/shopping/{id}/show', [SuscripcionController::class, 'show'])->name('shopping.show');

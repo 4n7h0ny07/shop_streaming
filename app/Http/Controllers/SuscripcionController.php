@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\BajaSuscripcionNotification;
+use Illuminate\Support\Facades\Mail;
+
 use App\Models\Suscripcion;
 use App\Models\Perfiles;
 use Illuminate\Http\Request;
@@ -154,7 +157,29 @@ class SuscripcionController extends Controller
 
     }
 
+    public function darDeBaja($id)
+    {
+        // Buscar la suscripción por ID
+        $suscripcion = Suscripcion::findOrFail($id);
+        $perfil_id = $suscripcion->perfil_id;
 
+        // Actualizar el estado a "inactivo"
+        $suscripcion->estado = 'inactivo';
+        $suscripcion->save();
+
+        // Marcar el perfil asociado como "disponible"
+        $perfil = Perfiles::findOrFail($perfil_id); // Relación con el modelo Perfil
+        if ($perfil) {
+            $perfil->estado = 'disponible'; // Cambiar el estado del perfil a "disponible"
+            $perfil->user_id = null; // Desasociar al usuario
+            $perfil->save();
+        }
+
+        // Enviar correo
+        Mail::to($suscripcion->user->email)->send(new BajaSuscripcionNotification($suscripcion));
+        // Redirigir con un mensaje de éxito
+        return redirect()->back()->with('success', 'La suscripción ha sido dada de baja correctamente.');
+    }
     /**
      * Show the form for editing the specified resource.
      */
