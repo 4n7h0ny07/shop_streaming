@@ -138,14 +138,16 @@
                                                             @foreach ($producto->cuentas as $cuenta)
                                                                 @foreach ($cuenta->perfiles as $perfil)
                                                                     @foreach ($perfil->suscripciones as $suscripcion)
-                                                                        <tr>
-                                                                            <td><span style="color: #f3101b">
-                                                                                    {{ \Carbon\Carbon::now()->diffInDays($suscripcion->fecha_fin) }}
-                                                                                    dias</span></td>
-                                                                            <td>{{ $suscripcion->user->name }}</td>
-                                                                            <td>{{ $producto->nombre }} <br>
-                                                                                {{ $cuenta->usuario }}</td>
-                                                                        </tr>
+                                                                        @if ($suscripcion->estado === 'activo')
+                                                                            <tr>
+                                                                                <td><span style="color: #f3101b">
+                                                                                        {{ \Carbon\Carbon::now()->diffInDays($suscripcion->fecha_fin) }}
+                                                                                        dias</span></td>
+                                                                                <td>{{ $suscripcion->user->name }}</td>
+                                                                                <td>{{ $producto->nombre }} <br>
+                                                                                    {{ $cuenta->usuario }}</td>
+                                                                            </tr>
+                                                                        @endif
                                                                     @endforeach
                                                                 @endforeach
                                                             @endforeach
@@ -158,7 +160,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <div class="panel" >
+                                        <div class="panel">
                                             <div class="alert alert-success" role="alert">
                                                 <b>
                                                     <h3 class="text-center"> Clientes con cuentas Vigentes</h3>
@@ -180,13 +182,17 @@
                                                                 @foreach ($product->cuentas as $cuenta)
                                                                     @foreach ($cuenta->perfiles as $perfil)
                                                                         @foreach ($perfil->suscripciones as $suscripcion)
-                                                                            <tr>
-                                                                                <td><span style="color: #52BE80">
-                                                                                        {{ \Carbon\Carbon::now()->diffInDays($suscripcion->fecha_fin) }}
-                                                                                        dias</span></td>
-                                                                                <td>{{ $suscripcion->user->name }} <br> {{ $cuenta->usuario }} </td>
-                                                                                <td>{{ $product->nombre }} <br> {{ $suscripcion->nombre_perfil }}</td>
-                                                                            </tr>
+                                                                            @if ($suscripcion->estado === 'activo')
+                                                                                <tr>
+                                                                                    <td><span style="color: #52BE80">
+                                                                                            {{ \Carbon\Carbon::now()->diffInDays($suscripcion->fecha_fin) }}
+                                                                                            dias</span></td>
+                                                                                    <td>{{ $suscripcion->user->name }} <br>
+                                                                                        {{ $cuenta->usuario }} </td>
+                                                                                    <td>{{ $product->nombre }} <br>
+                                                                                        {{ $suscripcion->nombre_perfil }}</td>
+                                                                                </tr>
+                                                                            @endif
                                                                         @endforeach
                                                                     @endforeach
                                                                 @endforeach
@@ -228,7 +234,7 @@
                                 ->with([
                                     'cuentas.perfiles.suscripciones' => function ($query) use ($user) {
                                         $query->where('user_id', $user->id)->where('fecha_fin', '>=', now()); // Verifica que la suscripción esté vigente
-                                    }
+                                    },
                                 ])
                                 ->get();
 
@@ -318,7 +324,7 @@
                                         <div class="panel">
                                             <div class="alert alert-danger" role="alert">
                                                 <b>
-                                                     <h3 class="text-center"> Cuentas Vencidas  </h3>
+                                                    <h3 class="text-center"> Cuentas Vencidas </h3>
                                                 </b>
                                             </div>
                                             <div class="panel-body">
@@ -328,8 +334,8 @@
                                                             <tr>
                                                                 <th>Vencio hace</th>
                                                                 <th>Producto</th>
-                                                                <th>Cuenta</th>                                                                
-                                              
+                                                                <th>Cuenta</th>
+
                                                             </tr>
                                                         </thead>
 
@@ -347,7 +353,7 @@
                                                                                     </td>
                                                                                     <td>{{ $producto->nombre }}</td>
                                                                                     <td>{{ $cuenta->usuario }}</td>
-                                                                                
+
                                                                                 </tr>
                                                                             @endforeach
                                                                         @endforeach
@@ -377,7 +383,7 @@
                                             <div class="panel">
                                                 <div class="alert alert-success" role="alert">
                                                     <b>
-                                                        <h3 class="text-center"> Cuentas Vigentes  </h3>
+                                                        <h3 class="text-center"> Cuentas Vigentes </h3>
                                                     </b>
                                                 </div>
                                                 <div class="panel-body">
@@ -404,7 +410,9 @@
                                                                                                 {{ \Carbon\Carbon::now()->diffInDays($suscripcion->fecha_fin) }}
                                                                                                 dias</span>
                                                                                         </td>
-                                                                                        <td>{{ $producto->nombre }} <br> {{$suscripcion->nombre_perfil}}</td>
+                                                                                        <td>{{ $producto->nombre }} <br>
+                                                                                            {{ $suscripcion->nombre_perfil }}
+                                                                                        </td>
                                                                                         <td> {{ $cuenta->usuario }} </td>
                                                                                         <td></td>
                                                                                     </tr>
