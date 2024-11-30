@@ -131,6 +131,7 @@
                                                             <th>Vencio hace</th>
                                                             <th>Cliente</th>
                                                             <th>Servicio</th>
+                                                            <th>Accion</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -146,6 +147,26 @@
                                                                                 <td>{{ $suscripcion->user->name }}</td>
                                                                                 <td>{{ $producto->nombre }} <br>
                                                                                     {{ $cuenta->usuario }}</td>
+                                                                                <td>
+                                                                                    @if ($suscripcion->estado === 'activo')
+                                                                                        <form method="POST"
+                                                                                            action="{{ route('suscripcion.baja', $suscripcion->id) }}"
+                                                                                            style="display: inline;">
+                                                                                            @csrf
+                                                                                            @method('PUT')
+                                                                                            <button type="submit"
+                                                                                                class="btn btn-danger"
+                                                                                                data-bs-toggle="tooltip"
+                                                                                                data-bs-placement="top"
+                                                                                                title="Dar de baja la suscripción">
+                                                                                                <i class="voyager-trash"></i>
+                                                                                            </button>
+                                                                                        </form>
+                                                                                    @else
+                                                                                        Dado de Baja en fecha: <br>
+                                                                                        {{ \Carbon\Carbon::parse($suscripcion->updated_at)->locale('es')->translatedFormat('j \\de F \\de Y') }}
+                                                                                    @endif
+                                                                                </td>
                                                                             </tr>
                                                                         @endif
                                                                     @endforeach
